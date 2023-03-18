@@ -20,20 +20,12 @@
     "url": "git+https://github.com/codersteps/markdowner.git"
   },
   "keywords": [
-    "block",
-    "based",
     "editor",
-    "rich",
-    "text",
-    "editor",
-    "editor",
-    "blog",
-    "text",
-    "editor",
-    "block",
-    "rich",
-    "text",
-    "editor"
+    "rich text",
+    "rich text editor",
+    "block rich text editor",
+    "block based editor",
+    "blog text editor"
   ],
   "author": "Codersteps",
   "license": "MIT",
