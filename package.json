@@ -1,0 +1,42 @@
+{
+  "name": "@abdessamadely/markdowner",
+  "version": "0.0.1",
+  "description": "A block based richtext editor for developers",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "dev": "vite build --watch",
+    "build": "vite build",
+    "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
+    "format": "prettier --write --parser typescript 'src/**/*.{ts,tsx}'"
+  },
+  "author": "Abdessamad El Hamdany",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.3.5",
+    "@typescript-eslint/eslint-plugin": "^8.5.0",
+    "@typescript-eslint/parser": "^8.5.0",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.35.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-storybook": "^0.8.0",
+    "postcss": "^8.4.45",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.11",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.4",
+    "vite-plugin-dts": "^4.2.1"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1"
+  }
+}
