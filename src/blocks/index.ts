@@ -1,2 +1,2 @@
-export * from './paragraph'
-export * from './blocks.types'
+export * from './ParagraphInput'
+export * from './ParagraphAction'
