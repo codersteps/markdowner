@@ -1,5 +1,7 @@
 import {
   DeleteBlockAction,
+  MoveBlockUpAction,
+  MoveBlockDownAction,
   CreateParagraphAction,
   UpdateParagraphAction,
   PushBlockElementAction,
@@ -39,6 +41,8 @@ export type MarkdownerState = {
 
 export type MarkdownerAction =
   | DeleteBlockAction
+  | MoveBlockUpAction
+  | MoveBlockDownAction
   | PushBlockElementAction
   | CreateParagraphAction
   | UpdateParagraphAction

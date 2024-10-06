@@ -1,5 +1,7 @@
 import {
   deleteBlockAction,
+  moveBlockUpAction,
+  moveBlockDownAction,
   createParagraphAction,
   updateParagraphAction,
   pushBlockElementAction,
@@ -18,8 +20,13 @@ export function markdownerReducer(
     case 'PUSH_BLOCK_ELEMENT':
       pushBlockElementAction(action.payload, elements)
       break
+    case 'MOVE_BLOCK_UP_ACTION':
+      moveBlockUpAction(draft, action.payload, elements)
+      break
+    case 'MOVE_BLOCK_DOWN_ACTION':
+      moveBlockDownAction(draft, action.payload, elements)
+      break
     case 'CREATE_PARAGRAPH_ACTION':
-      console.log(elements)
       createParagraphAction(draft)
       break
     case 'UPDATE_PARAGRAPH_ACTION':

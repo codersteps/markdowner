@@ -1,4 +1,6 @@
 export * from './delete-block.action'
+export * from './move-block-up.action'
+export * from './move-block-down.action'
 export * from './create-paragraph.action'
 export * from './update-paragraph.action'
 export * from './push-block-element.action'

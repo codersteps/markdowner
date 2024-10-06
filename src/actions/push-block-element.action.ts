@@ -3,6 +3,7 @@ export function pushBlockElementAction(
   elements: Map<number, HTMLElement>,
 ) {
   elements.set(payload.pos, payload.element)
+  payload.element.focus()
 }
 
 export type PushBlockElementAction = {

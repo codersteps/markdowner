@@ -1,6 +1,6 @@
 import { cn } from '../lib'
 import { ToolbarButton } from '.'
-import { useContext } from 'react'
+import { useCallback, useContext } from 'react'
 import {
   TrashIcon,
   XMarkIcon,
@@ -13,6 +13,15 @@ import { MarkdownerContext } from '../contexts'
 
 export function MarkdownerBlocks() {
   const { state, dispatch } = useContext(MarkdownerContext)
+  const onMounted = useCallback(
+    (pos: number, element: HTMLElement) => {
+      dispatch({
+        type: 'PUSH_BLOCK_ELEMENT',
+        payload: { pos, element },
+      })
+    },
+    [dispatch],
+  )
 
   return (
     <div className="bg-white pb-32 space-y-3 rounded-md">
@@ -55,6 +64,7 @@ export function MarkdownerBlocks() {
                     <EllipsisVerticalIcon className="h-4" />
                   )}
                 </ToolbarButton>
+
                 <div
                   className={cn(
                     state.activeTooltip?.pos === block.pos
@@ -62,26 +72,30 @@ export function MarkdownerBlocks() {
                       : 'hidden',
                   )}
                 >
-                  <ToolbarButton
-                    onClick={() => {
-                      dispatch({
-                        type: 'UPDATE_ACTIVE_TOOLTIP_ACTION',
-                        payload: { activeTooltip: null },
-                      })
-                    }}
-                  >
-                    <ArrowUpIcon className="h-4" />
-                  </ToolbarButton>
-                  <ToolbarButton
-                    onClick={() => {
-                      dispatch({
-                        type: 'UPDATE_ACTIVE_TOOLTIP_ACTION',
-                        payload: { activeTooltip: null },
-                      })
-                    }}
-                  >
-                    <ArrowDownIcon className="h-4" />
-                  </ToolbarButton>
+                  {block.pos > 0 && (
+                    <ToolbarButton
+                      onClick={() => {
+                        dispatch({
+                          type: 'MOVE_BLOCK_UP_ACTION',
+                          payload: { block },
+                        })
+                      }}
+                    >
+                      <ArrowUpIcon className="h-4" />
+                    </ToolbarButton>
+                  )}
+                  {block.pos < state.blocks.length - 1 && (
+                    <ToolbarButton
+                      onClick={() => {
+                        dispatch({
+                          type: 'MOVE_BLOCK_DOWN_ACTION',
+                          payload: { block },
+                        })
+                      }}
+                    >
+                      <ArrowDownIcon className="h-4" />
+                    </ToolbarButton>
+                  )}
                   <ToolbarButton
                     onClick={() => {
                       dispatch({
@@ -98,15 +112,7 @@ export function MarkdownerBlocks() {
 
             <div className="flex-grow">
               {block.type === 'paragraph' ? (
-                <ParagraphInput
-                  onMounted={(element) => {
-                    dispatch({
-                      type: 'PUSH_BLOCK_ELEMENT',
-                      payload: { pos: block.pos, element },
-                    })
-                  }}
-                  value={block}
-                />
+                <ParagraphInput onMounted={onMounted} value={block} />
               ) : null}
             </div>
           </div>

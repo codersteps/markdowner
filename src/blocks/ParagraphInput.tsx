@@ -5,7 +5,7 @@ import { useRef, useEffect, useContext } from 'react'
 
 type Props = {
   value: Paragraph
-  onMounted(target: HTMLTextAreaElement): void
+  onMounted(pos: number, element: HTMLTextAreaElement): void
   charactersPerRow?: number
 }
 
@@ -20,8 +20,8 @@ export function ParagraphInput({
   useEffect(() => {
     const element = ref.current as HTMLTextAreaElement
     autosize(element)
-    onMounted(element)
-  }, [onMounted])
+    onMounted(value.pos, element)
+  }, [value.pos, onMounted])
 
   return (
     <textarea
