@@ -1,9 +1,9 @@
-import { MarkdownerState, Block } from '../types'
+import { MarkdownerState, Block, MarkdownerElements } from '../types'
 
 export function moveBlockDownAction(
   state: MarkdownerState,
   payload: MoveBlockDownPayload,
-  elements: Map<number, HTMLElement>,
+  elements: MarkdownerElements,
 ) {
   state.activeTooltip = null
 

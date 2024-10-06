@@ -4,7 +4,12 @@ export function deleteBlockAction(
   state: MarkdownerState,
   payload: DeleteBlockPayload,
 ) {
+  state.activeTooltip = null
   state.blocks.splice(payload.block.pos, 1)
+
+  for (let i = 0; i < state.blocks.length; i++) {
+    state.blocks[i].pos = i
+  }
 }
 
 export type DeleteBlockAction = {

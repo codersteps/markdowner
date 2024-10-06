@@ -7,6 +7,7 @@ const initialState: MarkdownerState = {
   blocks: [],
   activeTooltip: null,
   activePosition: null,
+  prevSelectionEnd: null,
 }
 
 export const MarkdownerContext = createContext<{

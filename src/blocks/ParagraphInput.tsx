@@ -5,12 +5,14 @@ import { useRef, useEffect, useContext } from 'react'
 
 type Props = {
   value: Paragraph
+  onKey(key: string, block: Paragraph): void
   onMounted(pos: number, element: HTMLTextAreaElement): void
   charactersPerRow?: number
 }
 
 export function ParagraphInput({
   value,
+  onKey,
   onMounted,
   charactersPerRow = 81,
 }: Props) {
@@ -34,8 +36,20 @@ export function ParagraphInput({
           payload: { block: { ...value, text: e.currentTarget.value } },
         })
       }
+      onKeyUp={(e) => {
+        onKey(e.key, value)
+      }}
       onKeyDown={(e) => {
         switch (e.key) {
+          case 'ArrowUp':
+          case 'ArrowDown':
+          case 'ArrowRight':
+          case 'ArrowLeft':
+            dispatch({
+              type: 'UPDATE_PREV_SELECTION_END_ACTION',
+              payload: { prevSelectionEnd: e.currentTarget.selectionEnd },
+            })
+            break
           case 'Enter':
             e.preventDefault()
             dispatch({

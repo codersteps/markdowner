@@ -1,6 +1,5 @@
 import { cn } from '../lib'
 import { ToolbarButton } from '.'
-import { useCallback, useContext } from 'react'
 import {
   TrashIcon,
   XMarkIcon,
@@ -10,13 +9,25 @@ import {
 } from '@heroicons/react/20/solid'
 import { ParagraphInput } from '../blocks'
 import { MarkdownerContext } from '../contexts'
+import { useCallback, useContext } from 'react'
+import { Block, MarkdownerElement } from '../types'
 
 export function MarkdownerBlocks() {
   const { state, dispatch } = useContext(MarkdownerContext)
-  const onMounted = useCallback(
-    (pos: number, element: HTMLElement) => {
+  const onKey = useCallback(
+    (key: string, block: Block) => {
       dispatch({
-        type: 'PUSH_BLOCK_ELEMENT',
+        type: 'HANDLE_KEY_ACTION',
+        payload: { key, block },
+      })
+    },
+    [dispatch],
+  )
+
+  const onMounted = useCallback(
+    (pos: number, element: MarkdownerElement) => {
+      dispatch({
+        type: 'PUSH_BLOCK_ELEMENT_ACTION',
         payload: { pos, element },
       })
     },
@@ -112,7 +123,11 @@ export function MarkdownerBlocks() {
 
             <div className="flex-grow">
               {block.type === 'paragraph' ? (
-                <ParagraphInput onMounted={onMounted} value={block} />
+                <ParagraphInput
+                  onKey={onKey}
+                  onMounted={onMounted}
+                  value={block}
+                />
               ) : null}
             </div>
           </div>

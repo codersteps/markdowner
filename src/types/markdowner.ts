@@ -1,4 +1,5 @@
 import {
+  HandleKeyAction,
   DeleteBlockAction,
   MoveBlockUpAction,
   MoveBlockDownAction,
@@ -7,6 +8,7 @@ import {
   PushBlockElementAction,
   UpdateActiveTooltipAction,
   UpdateActivePositionAction,
+  UpdatePrevSelectionEndAction,
 } from '../actions'
 
 export enum Level {
@@ -32,14 +34,18 @@ export type Paragraph = {
 }
 
 export type Block = Paragraph | Heading
+export type MarkdownerElement = HTMLTextAreaElement
+export type MarkdownerElements = Map<number, MarkdownerElement>
 
 export type MarkdownerState = {
   blocks: Block[]
   activeTooltip: Block | null
   activePosition: number | null
+  prevSelectionEnd: number | null
 }
 
 export type MarkdownerAction =
+  | HandleKeyAction
   | DeleteBlockAction
   | MoveBlockUpAction
   | MoveBlockDownAction
@@ -48,3 +54,4 @@ export type MarkdownerAction =
   | UpdateParagraphAction
   | UpdateActiveTooltipAction
   | UpdateActivePositionAction
+  | UpdatePrevSelectionEndAction
