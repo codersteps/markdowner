@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import { ToolbarButton } from '../components'
 import { MarkdownerContext } from '../contexts'
 
-// reorder pos prop, when a new block is added in between
 export function ParagraphAction() {
   const { dispatch } = useContext(MarkdownerContext)
 

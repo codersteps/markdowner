@@ -5,19 +5,27 @@ export function moveBlockDownAction(
   payload: MoveBlockDownPayload,
   elements: MarkdownerElements,
 ) {
-  state.activeTooltip = null
-
-  if (payload.block.pos < state.blocks.length - 1) {
-    const block = state.blocks[payload.block.pos]
-    state.blocks[payload.block.pos] = state.blocks[payload.block.pos + 1]
-    state.blocks[payload.block.pos + 1] = block
-
-    for (let i = 0; i < state.blocks.length; i++) {
-      state.blocks[i].pos = i
-    }
-
-    elements.get(payload.block.pos + 1)?.focus()
+  const idx = state.blocks.findIndex((block) => block.id === payload.block.id)
+  if (idx === -1) {
+    return
   }
+
+  if (idx + 1 === state.blocks.length) {
+    const removedBlock = state.blocks.pop()
+    if (removedBlock) {
+      state.blocks.unshift(removedBlock)
+    }
+  } else if (idx !== -1) {
+    const [removedBlock] = state.blocks.splice(idx, 1)
+    state.blocks.splice(idx + 1, 0, removedBlock)
+  }
+
+  state.activeTooltip = null
+  state.activeElementId = payload.block.id
+
+  setTimeout(() => {
+    elements[idx].target.focus()
+  })
 }
 
 export type MoveBlockDownAction = {

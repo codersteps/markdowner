@@ -1,11 +1,19 @@
-import { MarkdownerElement, MarkdownerElements } from '../types'
+import {
+  MarkdownerState,
+  MarkdownerElement,
+  MarkdownerElements,
+} from '../types'
 
 export function pushBlockElementAction(
+  state: MarkdownerState,
   payload: PushBlockElementPayload,
   elements: MarkdownerElements,
 ) {
-  elements.set(payload.pos, payload.element)
-  payload.element.focus()
+  setTimeout(() => {
+    payload.target.focus()
+  })
+  elements.push(payload)
+  state.activeElementId = payload.id
 }
 
 export type PushBlockElementAction = {
@@ -13,7 +21,4 @@ export type PushBlockElementAction = {
   payload: PushBlockElementPayload
 }
 
-type PushBlockElementPayload = {
-  pos: number
-  element: MarkdownerElement
-}
+type PushBlockElementPayload = { id: string; target: MarkdownerElement }

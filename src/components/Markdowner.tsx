@@ -1,4 +1,5 @@
 import { Block } from '../types'
+import { uniqueId } from '../lib'
 import { MarkdownerProvider } from '../contexts'
 import { MarkdownerToolbar, MarkdownerBlocks } from '.'
 
@@ -9,7 +10,7 @@ export type MarkdownerProps = {
 export function Markdowner({
   initialBlocks = [
     {
-      pos: 0,
+      id: uniqueId(),
       text: '',
       type: 'paragraph',
       html: '',

@@ -7,7 +7,7 @@ import {
   UpdateParagraphAction,
   PushBlockElementAction,
   UpdateActiveTooltipAction,
-  UpdateActivePositionAction,
+  UpdateActiveElementIdAction,
   UpdatePrevSelectionEndAction,
 } from '../actions'
 
@@ -20,14 +20,14 @@ export enum Level {
 }
 
 export interface Heading {
-  pos: number
+  id: string
   type: 'heading'
   level: Level
   text: string
 }
 
 export type Paragraph = {
-  pos: number
+  id: string
   type: 'paragraph'
   text: string
   html?: string
@@ -35,12 +35,12 @@ export type Paragraph = {
 
 export type Block = Paragraph | Heading
 export type MarkdownerElement = HTMLTextAreaElement
-export type MarkdownerElements = Map<number, MarkdownerElement>
+export type MarkdownerElements = { id: string; target: MarkdownerElement }[]
 
 export type MarkdownerState = {
   blocks: Block[]
   activeTooltip: Block | null
-  activePosition: number | null
+  activeElementId: string | null
   prevSelectionEnd: number | null
 }
 
@@ -53,5 +53,5 @@ export type MarkdownerAction =
   | CreateParagraphAction
   | UpdateParagraphAction
   | UpdateActiveTooltipAction
-  | UpdateActivePositionAction
+  | UpdateActiveElementIdAction
   | UpdatePrevSelectionEndAction

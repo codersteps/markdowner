@@ -7,12 +7,12 @@ import {
   updateParagraphAction,
   pushBlockElementAction,
   updateActiveTooltipAction,
-  updateActivePositionAction,
+  updateActiveElementIdAction,
   updatePrevSelectionEndAction,
 } from '../actions'
 import { MarkdownerElements, MarkdownerAction, MarkdownerState } from '../types'
 
-const elements: MarkdownerElements = new Map()
+const elements: MarkdownerElements = []
 
 export function markdownerReducer(
   draft: MarkdownerState,
@@ -32,19 +32,19 @@ export function markdownerReducer(
       moveBlockDownAction(draft, action.payload, elements)
       break
     case 'CREATE_PARAGRAPH_ACTION':
-      createParagraphAction(draft)
+      createParagraphAction(draft, elements)
       break
     case 'UPDATE_PARAGRAPH_ACTION':
       updateParagraphAction(draft, action.payload)
       break
     case 'PUSH_BLOCK_ELEMENT_ACTION':
-      pushBlockElementAction(action.payload, elements)
+      pushBlockElementAction(draft, action.payload, elements)
       break
     case 'UPDATE_ACTIVE_TOOLTIP_ACTION':
       updateActiveTooltipAction(draft, action.payload)
       break
-    case 'UPDATE_ACTIVE_POSITION_ACTION':
-      updateActivePositionAction(draft, action.payload)
+    case 'UPDATE_ACTIVE_ELEMENT_ID_ACTION':
+      updateActiveElementIdAction(draft, action.payload)
       break
     case 'UPDATE_PREV_SELECTION_END_ACTION':
       updatePrevSelectionEndAction(draft, action.payload)

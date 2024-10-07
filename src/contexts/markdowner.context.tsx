@@ -6,7 +6,7 @@ import { Block, MarkdownerAction, MarkdownerState } from '../types'
 const initialState: MarkdownerState = {
   blocks: [],
   activeTooltip: null,
-  activePosition: null,
+  activeElementId: null,
   prevSelectionEnd: null,
 }
 

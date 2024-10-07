@@ -6,7 +6,7 @@ import { useRef, useEffect, useContext } from 'react'
 type Props = {
   value: Paragraph
   onKey(key: string, block: Paragraph): void
-  onMounted(pos: number, element: HTMLTextAreaElement): void
+  onMounted(id: string, target: HTMLTextAreaElement): void
   charactersPerRow?: number
 }
 
@@ -20,10 +20,12 @@ export function ParagraphInput({
   const { dispatch } = useContext(MarkdownerContext)
 
   useEffect(() => {
-    const element = ref.current as HTMLTextAreaElement
-    autosize(element)
-    onMounted(value.pos, element)
-  }, [value.pos, onMounted])
+    autosize(ref.current as HTMLTextAreaElement)
+  }, [])
+
+  useEffect(() => {
+    onMounted(value.id, ref.current as HTMLTextAreaElement)
+  }, [value.id, onMounted])
 
   return (
     <textarea
@@ -60,8 +62,8 @@ export function ParagraphInput({
       }}
       onFocus={() => {
         dispatch({
-          type: 'UPDATE_ACTIVE_POSITION_ACTION',
-          payload: { activePosition: value.pos },
+          type: 'UPDATE_ACTIVE_ELEMENT_ID_ACTION',
+          payload: { activeElementId: value.id },
         })
       }}
       placeholder="Paragraph"

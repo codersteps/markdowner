@@ -4,12 +4,9 @@ export function deleteBlockAction(
   state: MarkdownerState,
   payload: DeleteBlockPayload,
 ) {
+  const idx = state.blocks.findIndex((block) => block.id === payload.block.id)
+  state.blocks.splice(idx, 1)
   state.activeTooltip = null
-  state.blocks.splice(payload.block.pos, 1)
-
-  for (let i = 0; i < state.blocks.length; i++) {
-    state.blocks[i].pos = i
-  }
 }
 
 export type DeleteBlockAction = {

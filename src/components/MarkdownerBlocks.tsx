@@ -25,10 +25,10 @@ export function MarkdownerBlocks() {
   )
 
   const onMounted = useCallback(
-    (pos: number, element: MarkdownerElement) => {
+    (id: string, target: MarkdownerElement) => {
       dispatch({
         type: 'PUSH_BLOCK_ELEMENT_ACTION',
-        payload: { pos, element },
+        payload: { id, target },
       })
     },
     [dispatch],
@@ -36,25 +36,25 @@ export function MarkdownerBlocks() {
 
   return (
     <div className="bg-white pb-32 space-y-3 rounded-md">
-      {state.blocks.map((block) => (
-        <div key={block.pos}>
+      {state.blocks.map((block, idx) => (
+        <div key={block.id}>
           <div className="flex items-stretch space-x-4">
             <div
               className={cn(
                 'relative w-10',
-                state.activeTooltip?.pos === block.pos ? 'h-10' : '',
+                state.activeTooltip?.id === block.id ? 'h-10' : '',
               )}
             >
               <div
                 className={cn(
-                  state.activeTooltip?.pos === block.pos
+                  state.activeTooltip?.id === block.id
                     ? 'absolute top-0 z-10 bg-white rounded'
                     : '',
                 )}
               >
                 <ToolbarButton
                   onClick={() => {
-                    if (state.activeTooltip?.pos === block.pos) {
+                    if (state.activeTooltip?.id === block.id) {
                       dispatch({
                         type: 'UPDATE_ACTIVE_TOOLTIP_ACTION',
                         payload: { activeTooltip: null },
@@ -67,7 +67,7 @@ export function MarkdownerBlocks() {
                     }
                   }}
                 >
-                  {state.activeTooltip?.pos === block.pos ? (
+                  {state.activeTooltip?.id === block.id ? (
                     <XMarkIcon className="h-4" />
                   ) : block.type === 'heading' ? (
                     <span className="font-medium text-xs">H{block.level}</span>
@@ -78,12 +78,12 @@ export function MarkdownerBlocks() {
 
                 <div
                   className={cn(
-                    state.activeTooltip?.pos === block.pos
+                    state.activeTooltip?.id === block.id
                       ? 'flex flex-col items-center space-y-1 mt-1'
                       : 'hidden',
                   )}
                 >
-                  {block.pos > 0 && (
+                  {idx > 0 && (
                     <ToolbarButton
                       onClick={() => {
                         dispatch({
@@ -95,7 +95,7 @@ export function MarkdownerBlocks() {
                       <ArrowUpIcon className="h-4" />
                     </ToolbarButton>
                   )}
-                  {block.pos < state.blocks.length - 1 && (
+                  {idx < state.blocks.length - 1 && (
                     <ToolbarButton
                       onClick={() => {
                         dispatch({

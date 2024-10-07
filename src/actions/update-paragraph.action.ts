@@ -4,7 +4,12 @@ export function updateParagraphAction(
   state: MarkdownerState,
   payload: UpdateParagraphPayload,
 ) {
-  state.blocks[payload.block.pos] = payload.block
+  const idx = state.blocks.findIndex((block) => block.id === payload.block.id)
+  if (idx === -1) {
+    return
+  }
+
+  state.blocks[idx] = payload.block
 }
 
 export type UpdateParagraphAction = {
