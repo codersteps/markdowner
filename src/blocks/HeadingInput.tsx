@@ -1,25 +1,18 @@
-import autosize from 'autosize'
-import { Paragraph } from '../types'
-import { useEffect, useContext } from 'react'
+import { useContext } from 'react'
+import { Heading, Level } from '../types'
 import { MarkdownerContext, useMarkdowner } from '../core'
 
 type Props = {
-  value: Paragraph
-  charactersPerRow?: number
+  value: Heading
 }
 
-export function ParagraphInput({ value, charactersPerRow = 81 }: Props) {
+export function HeadingInput({ value }: Props) {
   const { dispatch } = useContext(MarkdownerContext)
   const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(value)
 
-  useEffect(() => {
-    autosize(ref.current as HTMLTextAreaElement)
-  }, [ref])
-
   return (
-    <textarea
+    <input
       ref={ref}
-      rows={Math.ceil(value.text.length / charactersPerRow)}
       value={value.text}
       onChange={(e) => {
         dispatch({
@@ -30,9 +23,17 @@ export function ParagraphInput({ value, charactersPerRow = 81 }: Props) {
       onKeyDown={handleKeyDown}
       onBlur={handleBlur}
       onFocus={handleFocus}
-      placeholder="Paragraph"
+      placeholder={
+        {
+          [Level.H2]: 'Heading',
+          [Level.H3]: 'Sub Heading',
+          [Level.H4]: 'Sub Sub Headind',
+          [Level.H5]: 'Sub Sub Headind',
+          [Level.H6]: 'Sub Sub Headind',
+        }[value.level]
+      }
       autoComplete="off"
-      className="block w-full pb-3 bg-transparent placeholder:text-plumbeous resize-none focus:outline-none"
+      className="w-full pb-3 bg-transparent font-bold resize-none focus:outline-none"
     />
   )
 }
