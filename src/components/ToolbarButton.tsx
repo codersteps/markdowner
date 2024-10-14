@@ -1,4 +1,4 @@
-import { cn } from '../lib/cn'
+import { cn } from '../lib'
 import { MouseEvent, ReactNode } from 'react'
 
 type Props = {

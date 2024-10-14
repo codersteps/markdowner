@@ -8,31 +8,12 @@ import {
   EllipsisVerticalIcon,
 } from '@heroicons/react/20/solid'
 import { ParagraphInput } from '../blocks'
-import { MarkdownerContext } from '../contexts'
+import { MarkdownerContext } from '../core'
 import { useCallback, useContext } from 'react'
 import { Block, MarkdownerElement } from '../types'
 
 export function MarkdownerBlocks() {
   const { state, dispatch } = useContext(MarkdownerContext)
-  const onKey = useCallback(
-    (key: string, block: Block) => {
-      dispatch({
-        type: 'HANDLE_KEY_ACTION',
-        payload: { key, block },
-      })
-    },
-    [dispatch],
-  )
-
-  const onMounted = useCallback(
-    (id: string, target: MarkdownerElement) => {
-      dispatch({
-        type: 'PUSH_BLOCK_ELEMENT_ACTION',
-        payload: { id, target },
-      })
-    },
-    [dispatch],
-  )
 
   return (
     <div className="bg-white pb-32 space-y-3 rounded-md">
@@ -54,17 +35,7 @@ export function MarkdownerBlocks() {
               >
                 <ToolbarButton
                   onClick={() => {
-                    if (state.activeTooltip?.id === block.id) {
-                      dispatch({
-                        type: 'UPDATE_ACTIVE_TOOLTIP_ACTION',
-                        payload: { activeTooltip: null },
-                      })
-                    } else {
-                      dispatch({
-                        type: 'UPDATE_ACTIVE_TOOLTIP_ACTION',
-                        payload: { activeTooltip: block },
-                      })
-                    }
+                    dispatch({ type: 'TOGGLE_TOOLTIP', payload: { block } })
                   }}
                 >
                   {state.activeTooltip?.id === block.id ? (
@@ -87,8 +58,8 @@ export function MarkdownerBlocks() {
                     <ToolbarButton
                       onClick={() => {
                         dispatch({
-                          type: 'MOVE_BLOCK_UP_ACTION',
-                          payload: { block },
+                          type: 'MOVE_BLOCK',
+                          payload: { block, dir: 'up' },
                         })
                       }}
                     >
@@ -99,8 +70,8 @@ export function MarkdownerBlocks() {
                     <ToolbarButton
                       onClick={() => {
                         dispatch({
-                          type: 'MOVE_BLOCK_DOWN_ACTION',
-                          payload: { block },
+                          type: 'MOVE_BLOCK',
+                          payload: { block, dir: 'down' },
                         })
                       }}
                     >
@@ -110,7 +81,7 @@ export function MarkdownerBlocks() {
                   <ToolbarButton
                     onClick={() => {
                       dispatch({
-                        type: 'DELETE_BLOCK_ACTION',
+                        type: 'REMOVE_BLOCK',
                         payload: { block },
                       })
                     }}
@@ -123,11 +94,7 @@ export function MarkdownerBlocks() {
 
             <div className="flex-grow">
               {block.type === 'paragraph' ? (
-                <ParagraphInput
-                  onKey={onKey}
-                  onMounted={onMounted}
-                  value={block}
-                />
+                <ParagraphInput value={block} />
               ) : null}
             </div>
           </div>

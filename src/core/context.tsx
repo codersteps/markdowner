@@ -1,13 +1,14 @@
 import { useImmerReducer } from 'use-immer'
-import { markdownerReducer } from '../reducers'
+import { markdownerReducer } from './reducer'
 import { Dispatch, ReactNode, createContext } from 'react'
 import { Block, MarkdownerAction, MarkdownerState } from '../types'
 
 const initialState: MarkdownerState = {
   blocks: [],
+  lastSelection: null,
   activeTooltip: null,
-  activeElementId: null,
-  prevSelectionEnd: null,
+  activeBlock: null,
+  lastActiveBlock: null,
 }
 
 export const MarkdownerContext = createContext<{

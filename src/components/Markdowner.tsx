@@ -1,7 +1,6 @@
 import { Block } from '../types'
-import { uniqueId } from '../lib'
-import { MarkdownerProvider } from '../contexts'
 import { MarkdownerToolbar, MarkdownerBlocks } from '.'
+import { MarkdownerProvider, uniqueId } from '../core'
 
 export type MarkdownerProps = {
   initialBlocks?: Block[]

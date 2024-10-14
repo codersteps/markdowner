@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { ToolbarButton } from '../components'
-import { MarkdownerContext } from '../contexts'
+import { MarkdownerContext, uniqueId } from '../core'
 
 export function ParagraphAction() {
   const { dispatch } = useContext(MarkdownerContext)
@@ -9,7 +9,17 @@ export function ParagraphAction() {
     <ToolbarButton
       title="Insert New Paragraph"
       onClick={() => {
-        dispatch({ type: 'CREATE_PARAGRAPH_ACTION' })
+        dispatch({
+          type: 'ADD_BLOCK',
+          payload: {
+            block: {
+              id: uniqueId(),
+              text: '',
+              type: 'paragraph',
+              html: '',
+            },
+          },
+        })
       }}
       className="text-sm font-bold"
     >
