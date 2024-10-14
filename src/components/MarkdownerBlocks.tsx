@@ -7,10 +7,9 @@ import {
   ArrowDownIcon,
   EllipsisVerticalIcon,
 } from '@heroicons/react/20/solid'
-import { ParagraphInput } from '../blocks'
+import { useContext } from 'react'
 import { MarkdownerContext } from '../core'
-import { useCallback, useContext } from 'react'
-import { Block, MarkdownerElement } from '../types'
+import { MarkdownerBlock } from './MarkdownerBlock'
 
 export function MarkdownerBlocks() {
   const { state, dispatch } = useContext(MarkdownerContext)
@@ -93,9 +92,7 @@ export function MarkdownerBlocks() {
             </div>
 
             <div className="flex-grow">
-              {block.type === 'paragraph' ? (
-                <ParagraphInput value={block} />
-              ) : null}
+              <MarkdownerBlock block={block} />
             </div>
           </div>
         </div>
