@@ -1,4 +1,4 @@
-import { Block, MarkdownerElement } from './markdowner'
+import { Block, MarkdownerElement } from '.'
 
 export type KeyDown = {
   type: 'KEY_DOWN'

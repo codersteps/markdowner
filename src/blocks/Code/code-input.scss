@@ -1,0 +1,40 @@
+.code-input {
+  position: relative;
+
+  & > pre,
+  & > textarea {
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: block;
+    position: absolute;
+  }
+
+  & > textarea,
+  & > pre > code {
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: var(--font-mono);
+  }
+
+  & > pre {
+    z-index: 10;
+  }
+
+  & > pre > code {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  & > textarea {
+    z-index: 20;
+    color: transparent;
+    background: transparent;
+    caret-color: var(--main-text-color);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

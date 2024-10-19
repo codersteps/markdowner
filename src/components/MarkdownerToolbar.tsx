@@ -1,5 +1,4 @@
-import { ParagraphAction } from '../blocks'
-import HeadingAction from '../blocks/HeadingAction'
+import { CodeAction, HeadingAction, ParagraphAction } from '../blocks'
 
 export function MarkdownerToolbar() {
   return (
@@ -7,6 +6,7 @@ export function MarkdownerToolbar() {
       <div className="flex space-x-1.5 bg-white rounded">
         <ParagraphAction />
         <HeadingAction />
+        <CodeAction />
       </div>
     </div>
   )

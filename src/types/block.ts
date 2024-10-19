@@ -20,4 +20,35 @@ export type Paragraph = {
   html?: string
 }
 
-export type Block = Paragraph | Heading
+export type Lang =
+  | 'c'
+  | 'md'
+  | 'js'
+  | 'ts'
+  | 'jsx'
+  | 'tsx'
+  | 'sql'
+  | 'css'
+  | 'ini'
+  | 'xml'
+  | 'yml'
+  | 'cpp'
+  | 'csv'
+  | 'php'
+  | 'html'
+  | 'scss'
+  | 'json'
+  | 'twig'
+  | 'java'
+  | 'blade'
+
+export interface Code {
+  id: string
+  type: 'code'
+  lang: Lang
+  text: string
+  html?: string
+  filename: string
+}
+
+export type Block = Code | Paragraph | Heading

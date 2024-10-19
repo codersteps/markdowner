@@ -1,7 +1,7 @@
 import autosize from 'autosize'
-import { Paragraph } from '../types'
+import { Paragraph } from '../../types'
 import { useEffect, useContext } from 'react'
-import { MarkdownerContext, useMarkdowner } from '../core'
+import { MarkdownerContext, useMarkdowner } from '../../core'
 
 type Props = {
   value: Paragraph
