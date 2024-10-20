@@ -108,8 +108,6 @@ export function buildBlocksManager(elements: MarkdownerElements) {
 
               element.blur()
               setTimeout(() => {
-                console.log({ element, selectionStart, selectionEnd })
-
                 element.selectionEnd = selectionEnd
                 element.selectionStart = selectionStart
                 element.focus()

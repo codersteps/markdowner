@@ -52,19 +52,26 @@ export function indentMultipleLine(
         ? textRows[textRowsIndex]
         : row
     })
+
   const indentedSelectedTextRows = selectedTextRows.map((row) => {
     return TAB_SPACES + row
   })
   for (let i = 0; i < indentedSelectedTextRows.length; i++) {
     const textRowsIndex = i + startRowIndex
+
+    if (i === 0) {
+      selectionStart += TAB_SPACES.length
+      selectionEnd += TAB_SPACES.length
+    } else if (i === selectedTextRows.length - 1) {
+      selectionEnd += TAB_SPACES.length
+    } else {
+      selectionEnd += TAB_SPACES.length
+    }
+
     textRows[textRowsIndex] = indentedSelectedTextRows[i]
   }
 
-  return {
-    text: textRows.join('\n'),
-    selectionStart: selectionStart + TAB_SPACES.length,
-    selectionEnd: selectionEnd + TAB_SPACES.length * 2,
-  }
+  return { text: textRows.join('\n'), selectionStart, selectionEnd }
 }
 
 export function unindentMultipleLine(
@@ -72,5 +79,44 @@ export function unindentMultipleLine(
   selectionStart: number,
   selectionEnd: number,
 ) {
-  return { text, selectionStart, selectionEnd }
+  const textRows = text.split('\n')
+  const startRowIndex = Math.max(
+    text.substring(0, selectionStart).split('\n').length - 1,
+  )
+  const endRowIndex = Math.max(
+    text.substring(0, selectionEnd).split('\n').length - 1,
+  )
+  const selectedTextRows = text
+    .substring(selectionStart, selectionEnd)
+    .split('\n')
+    .map((row, i) => {
+      const textRowsIndex = i + startRowIndex
+      return [startRowIndex, endRowIndex].includes(textRowsIndex)
+        ? textRows[textRowsIndex]
+        : row
+    })
+
+  const unindentedSelectedTextRows = selectedTextRows.map((row, i) => {
+    if (row.startsWith(TAB_SPACES)) {
+      if (i === 0) {
+        selectionStart -= TAB_SPACES.length
+        selectionEnd -= TAB_SPACES.length
+      } else if (i === selectedTextRows.length - 1) {
+        selectionEnd -= TAB_SPACES.length
+      } else {
+        selectionEnd -= TAB_SPACES.length
+      }
+
+      return row.substring(TAB_SPACES.length)
+    }
+
+    return row
+  })
+
+  for (let i = 0; i < unindentedSelectedTextRows.length; i++) {
+    const textRowsIndex = i + startRowIndex
+    textRows[textRowsIndex] = unindentedSelectedTextRows[i]
+  }
+
+  return { text: textRows.join('\n'), selectionStart, selectionEnd }
 }
