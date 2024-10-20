@@ -31,12 +31,46 @@ export function unindentSingleLine(text: string, cursor: number) {
   return { text: tabLeftText + tabRightText, cursor }
 }
 
-// export function indentMultipleLine(
-//   text: string,
-//   selection: { selectionEnd: number; selectionStart: number },
-// ) {}
+export function indentMultipleLine(
+  text: string,
+  selectionStart: number,
+  selectionEnd: number,
+) {
+  const textRows = text.split('\n')
+  const startRowIndex = Math.max(
+    text.substring(0, selectionStart).split('\n').length - 1,
+  )
+  const endRowIndex = Math.max(
+    text.substring(0, selectionEnd).split('\n').length - 1,
+  )
+  const selectedTextRows = text
+    .substring(selectionStart, selectionEnd)
+    .split('\n')
+    .map((row, i) => {
+      const textRowsIndex = i + startRowIndex
+      return [startRowIndex, endRowIndex].includes(textRowsIndex)
+        ? textRows[textRowsIndex]
+        : row
+    })
+  const indentedSelectedTextRows = selectedTextRows.map((row) => {
+    return TAB_SPACES + row
+  })
+  for (let i = 0; i < indentedSelectedTextRows.length; i++) {
+    const textRowsIndex = i + startRowIndex
+    textRows[textRowsIndex] = indentedSelectedTextRows[i]
+  }
 
-// export function unindentMultipleLine(
-//   text: string,
-//   selection: { selectionEnd: number; selectionStart: number },
-// ) {}
+  return {
+    text: textRows.join('\n'),
+    selectionStart: selectionStart + TAB_SPACES.length,
+    selectionEnd: selectionEnd + TAB_SPACES.length * 2,
+  }
+}
+
+export function unindentMultipleLine(
+  text: string,
+  selectionStart: number,
+  selectionEnd: number,
+) {
+  return { text, selectionStart, selectionEnd }
+}

@@ -2,8 +2,8 @@ import {
   uniqueId,
   indentSingleLine,
   unindentSingleLine,
-  // indentMultipleLine,
-  // unindentMultipleLine,
+  indentMultipleLine,
+  unindentMultipleLine,
 } from '@/core'
 import {
   Block,
@@ -87,10 +87,31 @@ export function buildBlocksManager(elements: MarkdownerElements) {
               draft.blocks[activeBlockIdx].text = text
 
               element.blur()
-
               setTimeout(() => {
                 element.selectionEnd = cursor
                 element.selectionStart = cursor
+                element.focus()
+              }, 0)
+            } else {
+              const { text, selectionStart, selectionEnd } = withShift
+                ? unindentMultipleLine(
+                    draft.blocks[activeBlockIdx].text,
+                    element.selectionStart,
+                    element.selectionEnd,
+                  )
+                : indentMultipleLine(
+                    draft.blocks[activeBlockIdx].text,
+                    element.selectionStart,
+                    element.selectionEnd,
+                  )
+              draft.blocks[activeBlockIdx].text = text
+
+              element.blur()
+              setTimeout(() => {
+                console.log({ element, selectionStart, selectionEnd })
+
+                element.selectionEnd = selectionEnd
+                element.selectionStart = selectionStart
                 element.focus()
               }, 0)
             }

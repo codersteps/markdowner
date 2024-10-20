@@ -1,7 +1,7 @@
 {
   // Specify the environments where the code will run
   "env": {
-    "jest": true, // Enable Jest for testing
+    "jest": false, // Enable Jest for testing
     "browser": true // Enable browser environment
   },
 
@@ -29,5 +29,10 @@
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-empty-object-type": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
