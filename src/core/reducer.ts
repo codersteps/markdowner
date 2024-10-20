@@ -1,5 +1,5 @@
-import { buildBlocksManager } from '.'
-import { MarkdownerAction, MarkdownerElements, MarkdownerState } from '../types'
+import { buildBlocksManager } from '@/core'
+import { MarkdownerAction, MarkdownerElements, MarkdownerState } from '@/types'
 
 const elements: MarkdownerElements = new Map()
 const blocksManager = buildBlocksManager(elements)
@@ -12,6 +12,10 @@ export function markdownerReducer(
 
   switch (type) {
     case 'ADD_ELEMENT':
+      if (payload.element.value.length) {
+        payload.element.selectionEnd = payload.element.value.length
+        payload.element.selectionStart = payload.element.value.length
+      }
       payload.element.focus()
       elements.set(payload.id, payload.element)
       break
@@ -19,7 +23,12 @@ export function markdownerReducer(
       elements.delete(payload.id)
       break
     case 'KEY_DOWN':
-      blocksManager.keyDown(draft, payload.key, payload.preventDefault)
+      blocksManager.keyDown(
+        draft,
+        payload.key,
+        payload.withShift,
+        payload.preventDefault,
+      )
       break
     case 'ADD_BLOCK':
       blocksManager.insert(draft, payload.block)
@@ -28,8 +37,8 @@ export function markdownerReducer(
       blocksManager.activate(draft, payload.block)
       break
     case 'DEACTIVATE_BLOCK':
-      draft.lastActiveBlock = draft.activeBlock
-      draft.activeBlock = null
+      draft.lastActiveBlockId = draft.activeBlockId
+      draft.activeBlockId = null
       break
     case 'UPDATE_BLOCK':
       blocksManager.update(draft, payload.block)

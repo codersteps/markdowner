@@ -13,7 +13,10 @@
   & > textarea,
   & > pre > code {
     font-size: 14px;
+    text-wrap: wrap;
     line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
     font-family: var(--font-mono);
   }
 
@@ -28,6 +31,7 @@
   }
 
   & > textarea {
+    resize: none;
     z-index: 20;
     color: transparent;
     background: transparent;

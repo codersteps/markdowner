@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { Heading, Level } from '../../types'
-import { MarkdownerContext, useMarkdowner } from '../../core'
+import { Heading, Level } from '@/types'
+import { MarkdownerContext, useMarkdowner } from '@/core'
 
 type Props = {
   value: Heading

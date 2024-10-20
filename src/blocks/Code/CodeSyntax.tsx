@@ -1,6 +1,6 @@
-import { Lang } from '../../types'
-import { useEffect, useRef, useState } from 'react'
-import { cn, CreateShiki, createShiki } from '../../lib'
+import { Lang } from '@/types'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { cn, CreateShiki, createShiki } from '@/lib'
 
 type Props = {
   value: { text: string; lang: Lang }
@@ -12,13 +12,7 @@ export function CodeSyntax({ value, height }: Props) {
   const [preClassName, setPreClassName] = useState('')
   const codeToHtmlRef = useRef<CreateShiki['codeToHtml']>()
 
-  useEffect(() => {
-    createShiki().then(({ codeToHtml }) => {
-      codeToHtmlRef.current = codeToHtml
-    })
-  }, [])
-
-  useEffect(() => {
+  const codeToSyntax = useCallback(() => {
     if (codeToHtmlRef.current) {
       const div = document.createElement('div')
       div.innerHTML = codeToHtmlRef.current(value)
@@ -26,7 +20,19 @@ export function CodeSyntax({ value, height }: Props) {
       setSyntax(preElement.innerHTML)
       setPreClassName(preElement.className)
     }
-  }, [value, codeToHtmlRef])
+  }, [value])
+
+  useEffect(() => {
+    createShiki().then(({ codeToHtml }) => {
+      codeToHtmlRef.current = codeToHtml
+      codeToSyntax()
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    codeToSyntax()
+  }, [codeToSyntax])
 
   return (
     <pre

@@ -1,5 +1,5 @@
 import { cn } from '../lib'
-import { ToolbarButton } from '.'
+import { ToolbarButton } from '@/components'
 import {
   TrashIcon,
   XMarkIcon,
@@ -22,12 +22,12 @@ export function MarkdownerBlocks() {
             <div
               className={cn(
                 'relative w-10',
-                state.activeTooltip?.id === block.id ? 'h-10' : '',
+                state.activeTooltipBlockId === block.id ? 'h-10' : '',
               )}
             >
               <div
                 className={cn(
-                  state.activeTooltip?.id === block.id
+                  state.activeTooltipBlockId === block.id
                     ? 'absolute top-0 z-10 bg-white rounded'
                     : '',
                 )}
@@ -37,7 +37,7 @@ export function MarkdownerBlocks() {
                     dispatch({ type: 'TOGGLE_TOOLTIP', payload: { block } })
                   }}
                 >
-                  {state.activeTooltip?.id === block.id ? (
+                  {state.activeTooltipBlockId === block.id ? (
                     <XMarkIcon className="h-4" />
                   ) : block.type === 'heading' ? (
                     <span className="font-medium text-xs">H{block.level}</span>
@@ -48,7 +48,7 @@ export function MarkdownerBlocks() {
 
                 <div
                   className={cn(
-                    state.activeTooltip?.id === block.id
+                    state.activeTooltipBlockId === block.id
                       ? 'flex flex-col items-center space-y-1 mt-1'
                       : 'hidden',
                   )}

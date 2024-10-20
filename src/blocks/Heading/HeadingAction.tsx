@@ -1,8 +1,8 @@
-import { cn } from '../../lib'
-import { Level } from '../../types'
+import { cn } from '@/lib'
+import { Level } from '@/types'
 import { useContext, useState } from 'react'
-import { ToolbarButton } from '../../components'
-import { MarkdownerContext, uniqueId } from '../../core'
+import { ToolbarButton } from '@/components'
+import { MarkdownerContext, uniqueId } from '@/core'
 
 export function HeadingAction() {
   const [isOpen, setIsOpen] = useState(false)

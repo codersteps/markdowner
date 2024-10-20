@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import { ToolbarButton } from '../../components'
-import { MarkdownerContext, uniqueId } from '../../core'
+import { ToolbarButton } from '@/components'
+import { MarkdownerContext, uniqueId } from '@/core'
 
 export function CodeAction() {
   const { dispatch } = useContext(MarkdownerContext)

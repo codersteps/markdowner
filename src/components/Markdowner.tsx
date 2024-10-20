@@ -1,6 +1,6 @@
 import { Block } from '../types'
-import { MarkdownerToolbar, MarkdownerBlocks } from '.'
 import { MarkdownerProvider, uniqueId } from '../core'
+import { MarkdownerToolbar, MarkdownerBlocks } from './index'
 
 export type MarkdownerProps = {
   initialBlocks?: Block[]
@@ -10,7 +10,18 @@ export function Markdowner({
   initialBlocks = [
     {
       id: uniqueId(),
-      text: '',
+      text: `setTimeout(() => {
+  element.selectionEnd = cursor + tabSpaces.length
+  element.selectionStart = cursor + tabSpaces.length
+}, 0)`,
+      lang: 'ts',
+      type: 'code',
+      filename: '',
+      html: '',
+    },
+    {
+      id: uniqueId(),
+      text: `This snippet will change the selection to the next indented value.`,
       type: 'paragraph',
       html: '',
     },

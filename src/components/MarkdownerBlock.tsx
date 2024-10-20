@@ -7,7 +7,6 @@ export const MarkdownerBlock = memo(function MarkdownerBlock({
 }: {
   block: Block
 }) {
-  console.log(block.type)
   switch (block.type) {
     case 'code':
       return <CodeInput value={block} />

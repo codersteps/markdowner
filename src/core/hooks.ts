@@ -33,7 +33,11 @@ export function useMarkdowner(block: Block) {
     (e) => {
       dispatch({
         type: 'KEY_DOWN',
-        payload: { key: e.key, preventDefault: () => e.preventDefault() },
+        payload: {
+          key: e.key,
+          withShift: e.shiftKey,
+          preventDefault: () => e.preventDefault(),
+        },
       })
     },
     [dispatch],

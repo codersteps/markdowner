@@ -1,8 +1,8 @@
 import './code-input.scss'
+import { Code } from '@/types'
 import autosize from 'autosize'
-import { Code } from '../../types'
 import { CodeSyntax } from './CodeSyntax'
-import { MarkdownerContext, useMarkdowner } from '../../core'
+import { MarkdownerContext, useMarkdowner } from '@/core'
 import { useContext, useEffect, useState, useCallback } from 'react'
 
 type Props = {
@@ -12,9 +12,11 @@ type Props = {
 export function CodeInput({ value }: Props) {
   const { dispatch } = useContext(MarkdownerContext)
   const [height, setHeight] = useState<string>('auto')
-  const { ref, handleBlur, handleFocus } = useMarkdowner(value)
+  const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(value)
 
   const handleAutosizeResized = useCallback(() => {
+    console.log((ref.current as HTMLTextAreaElement).style.height)
+
     setHeight((ref.current as HTMLTextAreaElement).style.height)
   }, [ref])
 
@@ -33,9 +35,10 @@ export function CodeInput({ value }: Props) {
   }, [ref, handleAutosizeResized])
 
   return (
-    <div className="code-input">
+    <div className="code-input" style={{ height }}>
       <textarea
         ref={ref}
+        value={value.text}
         spellCheck="false"
         onChange={(e) => {
           const block = { ...value, text: e.currentTarget.value }
@@ -46,6 +49,7 @@ export function CodeInput({ value }: Props) {
         }}
         onBlur={handleBlur}
         onFocus={handleFocus}
+        onKeyDown={handleKeyDown}
         placeholder="Code"
       ></textarea>
       <CodeSyntax height={height} value={value} />

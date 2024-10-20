@@ -1,8 +1,8 @@
-import { Block, MarkdownerElement } from '.'
+import { Block, MarkdownerElement } from '@/types'
 
 export type KeyDown = {
   type: 'KEY_DOWN'
-  payload: { preventDefault(): void; key: string }
+  payload: { preventDefault(): void; key: string; withShift: boolean }
 }
 
 export type AddElement = {

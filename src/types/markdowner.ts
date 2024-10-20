@@ -1,10 +1,10 @@
-import { Block } from '.'
+import { Block } from '@/types'
 
 export type MarkdownerState = {
   blocks: Block[]
-  activeTooltip: Block | null
-  activeBlock: Block | null
-  lastActiveBlock: Block | null
+  activeTooltipBlockId: string | null
+  activeBlockId: string | null
+  lastActiveBlockId: string | null
   lastSelection: { selectionStart: number; selectionEnd: number } | null
 }
 

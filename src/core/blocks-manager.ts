@@ -1,22 +1,32 @@
-import { uniqueId } from '.'
+import {
+  uniqueId,
+  indentSingleLine,
+  unindentSingleLine,
+  // indentMultipleLine,
+  // unindentMultipleLine,
+} from '@/core'
 import {
   Block,
   MarkdownerState,
   MarkdownerElement,
   MarkdownerElements,
-} from '../types'
+} from '@/types'
 
 export function buildBlocksManager(elements: MarkdownerElements) {
   return {
-    keyDown(draft: MarkdownerState, key: string, preventDefault: () => void) {
-      let idx: number = -1
+    keyDown(
+      draft: MarkdownerState,
+      key: string,
+      withShift: boolean,
+      preventDefault: () => void,
+    ) {
       let element: MarkdownerElement | undefined
       let prevElement: MarkdownerElement | undefined
       let nextElement: MarkdownerElement | undefined
+      let activeBlockIdx: number = -1
 
-      if (draft.activeBlock) {
-        const id = draft.activeBlock.id
-        element = elements.get(id)
+      if (draft.activeBlockId) {
+        element = elements.get(draft.activeBlockId)
 
         if (element) {
           draft.lastSelection = {
@@ -24,30 +34,67 @@ export function buildBlocksManager(elements: MarkdownerElements) {
             selectionEnd: element.selectionEnd,
           }
 
-          idx = draft.blocks.findIndex((block) => block.id === id)
+          activeBlockIdx = draft.blocks.findIndex(
+            (block) => block.id === draft.activeBlockId,
+          )
 
-          if (['ArrowUp', 'ArrowLeft'].includes(key) && idx > 0) {
-            prevElement = elements.get(draft.blocks[idx - 1].id)
+          if (['ArrowUp', 'ArrowLeft'].includes(key) && activeBlockIdx > 0) {
+            prevElement = elements.get(draft.blocks[activeBlockIdx - 1].id)
           }
 
           if (
             ['ArrowDown', 'ArrowRight'].includes(key) &&
-            idx + 1 < draft.blocks.length
+            activeBlockIdx + 1 < draft.blocks.length
           ) {
-            nextElement = elements.get(draft.blocks[idx + 1].id)
+            nextElement = elements.get(draft.blocks[activeBlockIdx + 1].id)
           }
         }
       }
 
       switch (key) {
         case 'Enter':
-          preventDefault()
-          this.insert(draft, {
-            id: uniqueId(),
-            text: '',
-            type: 'paragraph',
-            html: '',
-          })
+          if (
+            activeBlockIdx !== -1 &&
+            ['heading', 'paragraph'].includes(draft.blocks[activeBlockIdx].type)
+          ) {
+            preventDefault()
+            this.insert(draft, {
+              id: uniqueId(),
+              text: '',
+              type: 'paragraph',
+              html: '',
+            })
+          }
+          break
+        case 'Tab':
+          if (
+            element &&
+            activeBlockIdx !== -1 &&
+            ['code'].includes(draft.blocks[activeBlockIdx].type)
+          ) {
+            preventDefault()
+
+            if (element.selectionStart === element.selectionEnd) {
+              const { text, cursor } = withShift
+                ? unindentSingleLine(
+                    draft.blocks[activeBlockIdx].text,
+                    element.selectionStart,
+                  )
+                : indentSingleLine(
+                    draft.blocks[activeBlockIdx].text,
+                    element.selectionStart,
+                  )
+              draft.blocks[activeBlockIdx].text = text
+
+              element.blur()
+
+              setTimeout(() => {
+                element.selectionEnd = cursor
+                element.selectionStart = cursor
+                element.focus()
+              }, 0)
+            }
+          }
           break
         case 'ArrowUp':
         case 'ArrowLeft':
@@ -67,7 +114,7 @@ export function buildBlocksManager(elements: MarkdownerElements) {
             )
           }, 0)
 
-          this.activate(draft, draft.blocks[idx - 1])
+          this.activate(draft, draft.blocks[activeBlockIdx - 1])
           break
         case 'ArrowDown':
         case 'ArrowRight':
@@ -91,7 +138,7 @@ export function buildBlocksManager(elements: MarkdownerElements) {
             )
           }, 0)
 
-          this.activate(draft, draft.blocks[idx + 1])
+          this.activate(draft, draft.blocks[activeBlockIdx + 1])
           break
       }
     },
@@ -102,16 +149,13 @@ export function buildBlocksManager(elements: MarkdownerElements) {
     },
 
     insert(draft: MarkdownerState, block: Block) {
-      const activeBlock = draft.activeBlock || draft.lastActiveBlock
-      console.log({ activeBlock })
-      if (!activeBlock) {
+      const activeBlockId = draft.activeBlockId || draft.lastActiveBlockId
+      if (!activeBlockId) {
         return this.push(draft, block)
       }
 
       for (let i = 0; i < draft.blocks.length; i++) {
-        if (draft.blocks[i].id === activeBlock.id) {
-          console.log('found')
-
+        if (draft.blocks[i].id === activeBlockId) {
           draft.blocks.splice(i + 1, 0, block)
           this.activate(draft, block)
           break
@@ -120,8 +164,8 @@ export function buildBlocksManager(elements: MarkdownerElements) {
     },
 
     activate(draft: MarkdownerState, block: Block) {
-      draft.lastActiveBlock = draft.activeBlock
-      draft.activeBlock = block
+      draft.lastActiveBlockId = draft.activeBlockId
+      draft.activeBlockId = block.id
     },
 
     update(draft: MarkdownerState, block: Block) {
@@ -137,8 +181,8 @@ export function buildBlocksManager(elements: MarkdownerElements) {
       for (let i = 0; i < draft.blocks.length; i++) {
         if (draft.blocks[i].id === block.id) {
           draft.blocks.splice(i, 1)
-          draft.activeBlock = null
-          draft.lastActiveBlock = null
+          draft.activeBlockId = null
+          draft.lastActiveBlockId = null
           elements.delete(block.id)
 
           if (i > 0) {
@@ -179,9 +223,10 @@ export function buildBlocksManager(elements: MarkdownerElements) {
     },
 
     toggleTooltip(draft: MarkdownerState, block: Block) {
-      draft.activeTooltip =
-        draft.activeTooltip === null || draft.activeTooltip.id !== block.id
-          ? block
+      draft.activeTooltipBlockId =
+        draft.activeTooltipBlockId === null ||
+        draft.activeTooltipBlockId !== block.id
+          ? block.id
           : null
     },
   }
