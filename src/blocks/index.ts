@@ -1,5 +1,7 @@
 export * from './Code/CodeInput'
 export * from './Code/CodeAction'
+export * from './Picture/PictureInput'
+export * from './Picture/PictureAction'
 export * from './Heading/HeadingInput'
 export * from './Heading/HeadingAction'
 export * from './Paragraph/ParagraphInput'

@@ -1,10 +1,14 @@
 import { Block } from '@/types'
 
-export type UploadResponse = {
-  alt: string | null
-  path: string
-  caption: string | null
-}
+export type UploadResponse =
+  | {
+      alt: string | null
+      path: string
+      caption: string | null
+    }
+  | {
+      error: string
+    }
 
 export type UploadHandler = (formData: FormData) => Promise<UploadResponse>
 

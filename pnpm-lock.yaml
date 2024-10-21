@@ -14,9 +14,15 @@ importers:
       autosize:
         specifier: ^6.0.1
         version: 6.0.1
+      cropperjs:
+        specifier: ^1.6.2
+        version: 1.6.2
       immer:
         specifier: ^10.1.1
         version: 10.1.1
+      noty:
+        specifier: 3.2.0-beta-deprecated
+        version: 3.2.0-beta-deprecated
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -959,6 +965,9 @@ packages:
   confbox@0.1.7:
     resolution: {integrity: sha512-uJcB/FKZtBMCJpK8MQji6bJHgu1tixKPxRLeGkNzBoOZzpnZUJm0jm2/sBDWcuBx1dYgxV4JU+g5hmNxCyAmdA==}
 
+  cropperjs@1.6.2:
+    resolution: {integrity: sha512-nhymn9GdnV3CqiEHJVai54TULFAE3VshJTXSqSJKa8yXAKyBKDWdhHarnlIPrshJ0WMFTGuFvG02YjLXfPiuOA==}
+
   cross-spawn@7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -1655,6 +1664,10 @@ packages:
   normalize-range@0.1.2:
     resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
+
+  noty@3.2.0-beta-deprecated:
+    resolution: {integrity: sha512-ntRbHuQ9SnnnVFZm/oq5L1DBCaHQUvsU24AwZH3PGjAWx2YqR/IhOadMk11vmJovYiQo00oqTj6Hp+D6PGtmLA==}
+    deprecated: no longer supported
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -3231,6 +3244,8 @@ snapshots:
 
   confbox@0.1.7: {}
 
+  cropperjs@1.6.2: {}
+
   cross-spawn@7.0.3:
     dependencies:
       path-key: 3.1.1
@@ -4049,6 +4064,8 @@ snapshots:
   normalize-path@3.0.0: {}
 
   normalize-range@0.1.2: {}
+
+  noty@3.2.0-beta-deprecated: {}
 
   object-assign@4.1.1: {}
 

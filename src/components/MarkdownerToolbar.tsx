@@ -1,4 +1,9 @@
-import { CodeAction, HeadingAction, ParagraphAction } from '../blocks'
+import {
+  CodeAction,
+  HeadingAction,
+  ParagraphAction,
+  PictureAction,
+} from '@/blocks'
 
 export function MarkdownerToolbar() {
   return (
@@ -7,6 +12,7 @@ export function MarkdownerToolbar() {
         <ParagraphAction />
         <HeadingAction />
         <CodeAction />
+        <PictureAction />
       </div>
     </div>
   )

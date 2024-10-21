@@ -74,17 +74,17 @@ export function buildBlocksManager(elements: MarkdownerElements) {
           ) {
             preventDefault()
 
+            const activeBlock = draft.blocks[activeBlockIdx]
+
+            if (!('text' in activeBlock)) {
+              break
+            }
+
             if (element.selectionStart === element.selectionEnd) {
               const { text, cursor } = withShift
-                ? unindentSingleLine(
-                    draft.blocks[activeBlockIdx].text,
-                    element.selectionStart,
-                  )
-                : indentSingleLine(
-                    draft.blocks[activeBlockIdx].text,
-                    element.selectionStart,
-                  )
-              draft.blocks[activeBlockIdx].text = text
+                ? unindentSingleLine(activeBlock.text, element.selectionStart)
+                : indentSingleLine(activeBlock.text, element.selectionStart)
+              activeBlock.text = text
 
               element.blur()
               setTimeout(() => {
@@ -95,16 +95,16 @@ export function buildBlocksManager(elements: MarkdownerElements) {
             } else {
               const { text, selectionStart, selectionEnd } = withShift
                 ? unindentMultipleLine(
-                    draft.blocks[activeBlockIdx].text,
+                    activeBlock.text,
                     element.selectionStart,
                     element.selectionEnd,
                   )
                 : indentMultipleLine(
-                    draft.blocks[activeBlockIdx].text,
+                    activeBlock.text,
                     element.selectionStart,
                     element.selectionEnd,
                   )
-              draft.blocks[activeBlockIdx].text = text
+              activeBlock.text = text
 
               element.blur()
               setTimeout(() => {

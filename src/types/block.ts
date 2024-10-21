@@ -51,4 +51,12 @@ export interface Code {
   filename: string
 }
 
-export type Block = Code | Paragraph | Heading
+export type Picture = {
+  id: string
+  type: 'picture'
+  alt: string
+  src: string
+  caption: string
+}
+
+export type Block = Code | Paragraph | Picture | Heading

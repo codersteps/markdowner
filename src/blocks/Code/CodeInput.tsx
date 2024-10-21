@@ -1,4 +1,3 @@
-import './code-input.scss'
 import { Code } from '@/types'
 import autosize from 'autosize'
 import { CodeSyntax } from './CodeSyntax'
