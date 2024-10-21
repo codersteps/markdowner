@@ -1,12 +1,9 @@
-import { Block } from '../types'
-import { MarkdownerProvider, uniqueId } from '../core'
-import { MarkdownerToolbar, MarkdownerBlocks } from './index'
-
-export type MarkdownerProps = {
-  initialBlocks?: Block[]
-}
+import { MarkdownerProps } from '@/types'
+import { MarkdownerProvider, uniqueId } from '@/core'
+import { MarkdownerToolbar, MarkdownerBlocks } from '@/components'
 
 export function Markdowner({
+  onUpload,
   initialBlocks = [
     {
       id: uniqueId(),
@@ -28,7 +25,7 @@ export function Markdowner({
   ],
 }: MarkdownerProps) {
   return (
-    <MarkdownerProvider value={initialBlocks}>
+    <MarkdownerProvider value={{ initialBlocks, onUpload }}>
       <div className="relative flex flex-col space-y-6">
         <MarkdownerToolbar />
         <MarkdownerBlocks />

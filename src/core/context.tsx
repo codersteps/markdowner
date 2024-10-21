@@ -1,10 +1,16 @@
+import {
+  Block,
+  UploadHandler,
+  MarkdownerState,
+  MarkdownerAction,
+} from '@/types'
+import { markdownerReducer } from '@/core'
 import { useImmerReducer } from 'use-immer'
-import { markdownerReducer } from './reducer'
 import { Dispatch, ReactNode, createContext } from 'react'
-import { Block, MarkdownerAction, MarkdownerState } from '../types'
 
 const initialState: MarkdownerState = {
   blocks: [],
+  onUpload: null,
   lastSelection: null,
   activeTooltipBlockId: null,
   activeBlockId: null,
@@ -16,12 +22,16 @@ export const MarkdownerContext = createContext<{
   dispatch: Dispatch<MarkdownerAction>
 }>({ state: initialState, dispatch() {} })
 
-type Props = { value: Block[]; children: ReactNode }
+type Props = {
+  value: { initialBlocks: Block[]; onUpload: UploadHandler | null }
+  children: ReactNode
+}
 
 export function MarkdownerProvider({ value, children }: Props) {
   const [state, dispatch] = useImmerReducer(markdownerReducer, {
     ...initialState,
-    blocks: value,
+    blocks: value.initialBlocks,
+    onUpload: value.onUpload,
   })
 
   return (
