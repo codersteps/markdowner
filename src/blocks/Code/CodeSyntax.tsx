@@ -5,9 +5,10 @@ import { cn, CreateShiki, createShiki } from '@/lib'
 type Props = {
   value: { text: string; lang: Lang }
   height: string
+  setReady: () => void
 }
 
-export function CodeSyntax({ value, height }: Props) {
+export function CodeSyntax({ value, height, setReady }: Props) {
   const [syntax, setSyntax] = useState('')
   const [preClassName, setPreClassName] = useState('')
   const codeToHtmlRef = useRef<CreateShiki['codeToHtml']>()
@@ -26,6 +27,9 @@ export function CodeSyntax({ value, height }: Props) {
     createShiki().then(({ codeToHtml }) => {
       codeToHtmlRef.current = codeToHtml
       codeToSyntax()
+      setTimeout(() => {
+        setReady()
+      }, 0)
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

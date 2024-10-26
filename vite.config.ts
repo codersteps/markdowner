@@ -15,7 +15,7 @@ export default defineConfig({
       external: [...Object.keys(peerDependencies)],
     },
     sourcemap: true,
-    emptyOutDir: false,
+    emptyOutDir: true,
   },
   resolve: {
     alias: {

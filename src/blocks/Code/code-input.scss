@@ -1,44 +1,106 @@
-.code-input {
-  position: relative;
+.mdr-code {
+  .code-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
 
-  & > pre,
-  & > textarea {
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: block;
-    position: absolute;
+    input,
+    select {
+      height: 40px;
+      font-size: 14px;
+      font-weight: 500;
+      padding-left: 12px;
+      padding-right: 12px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    input {
+      flex-grow: 1;
+      margin-right: 12px;
+      border-radius: 4px;
+      background: var(--main-bg-color);
+      border: 1px solid var(--main-border-color);
+
+      &:focus {
+        border-color: var(--focus-border-color);
+      }
+    }
+
+    .select-wrapper {
+      padding-right: 12px;
+      border: 1px solid var(--main-border-color);
+
+      &:has(select:focus) {
+        border-color: var(--focus-border-color);
+      }
+
+      &,
+      select {
+        border-radius: 4px;
+        background: var(--main-bg-color);
+      }
+
+      select {
+        padding-right: 0;
+        text-transform: capitalize;
+      }
+    }
   }
 
-  & > textarea,
-  & > pre > code {
-    font-size: 14px;
-    text-wrap: wrap;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    overflow-wrap: break-word;
-    font-family: var(--font-mono);
-  }
+  .code-input {
+    position: relative;
 
-  & > pre {
-    z-index: 10;
-  }
+    & > pre,
+    & > textarea {
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: block;
+      position: absolute;
+    }
 
-  & > pre > code {
-    width: 100%;
-    height: 100%;
-    display: block;
-  }
+    & > textarea,
+    & > pre > code {
+      padding: 12px;
+      font-size: 14px;
+      text-wrap: wrap;
+      line-height: 1.5;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      font-family: var(--font-mono);
+    }
 
-  & > textarea {
-    resize: none;
-    z-index: 20;
-    color: transparent;
-    background: transparent;
-    caret-color: var(--main-text-color);
+    & > pre {
+      z-index: 10;
+    }
 
-    &:focus {
-      outline: none;
+    & > pre > code {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    & > textarea {
+      resize: none;
+      z-index: 20;
+      color: transparent;
+      background: transparent;
+      caret-color: var(--main-text-color);
+
+      &:focus {
+        outline: none;
+        border-color: var(--focus-border-color);
+      }
+    }
+
+    &.--initialized {
+      & > textarea {
+        border: 1px solid var(--main-border-color);
+      }
     }
   }
 }

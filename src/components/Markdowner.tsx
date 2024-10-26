@@ -13,7 +13,7 @@ export function Markdowner({
 }, 0)`,
       lang: 'ts',
       type: 'code',
-      filename: '',
+      filename: 'Untitled.ts',
       html: '',
     },
     {

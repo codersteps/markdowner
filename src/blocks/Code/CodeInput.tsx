@@ -1,5 +1,6 @@
-import { Code } from '@/types'
 import autosize from 'autosize'
+import { cn, langs } from '@/lib'
+import { Code, Lang } from '@/types'
 import { CodeSyntax } from './CodeSyntax'
 import { MarkdownerContext, useMarkdowner } from '@/core'
 import { useContext, useEffect, useState, useCallback } from 'react'
@@ -10,6 +11,7 @@ type Props = {
 
 export function CodeInput({ value }: Props) {
   const { dispatch } = useContext(MarkdownerContext)
+  const [ready, setReady] = useState(false)
   const [height, setHeight] = useState<string>('auto')
   const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(value)
 
@@ -24,7 +26,6 @@ export function CodeInput({ value }: Props) {
 
     autosize(textArea)
     setHeight(textArea.style.height)
-
     textArea.addEventListener('autosize:resized', handleAutosizeResized)
 
     return function () {
@@ -34,24 +35,63 @@ export function CodeInput({ value }: Props) {
   }, [ref, handleAutosizeResized])
 
   return (
-    <div className="code-input" style={{ height }}>
-      <textarea
-        ref={ref}
-        value={value.text}
-        spellCheck="false"
-        onChange={(e) => {
-          const block = { ...value, text: e.currentTarget.value }
-          dispatch({
-            type: 'UPDATE_BLOCK',
-            payload: { block },
-          })
-        }}
-        onBlur={handleBlur}
-        onFocus={handleFocus}
-        onKeyDown={handleKeyDown}
-        placeholder="Code"
-      ></textarea>
-      <CodeSyntax height={height} value={value} />
-    </div>
+    <>
+      <div className="code-header">
+        <input
+          type="text"
+          placeholder="filename"
+          value={value.filename}
+          onChange={(e) => {
+            const block = { ...value, filename: e.currentTarget.value }
+            dispatch({
+              type: 'UPDATE_BLOCK',
+              payload: { block },
+            })
+          }}
+        />
+        <div className="select-wrapper">
+          <select
+            value={value.lang}
+            onChange={(e) => {
+              const block = { ...value, lang: e.currentTarget.value as Lang }
+              dispatch({
+                type: 'UPDATE_BLOCK',
+                payload: { block },
+              })
+            }}
+          >
+            {langs.map((lang) => (
+              <option key={lang}>{lang}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+      <div
+        className={cn('code-input', ready ? '--initialized' : '')}
+        style={{ height }}
+      >
+        <textarea
+          ref={ref}
+          value={value.text}
+          spellCheck="false"
+          onChange={(e) => {
+            const block = { ...value, text: e.currentTarget.value }
+            dispatch({
+              type: 'UPDATE_BLOCK',
+              payload: { block },
+            })
+          }}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          onKeyDown={handleKeyDown}
+          placeholder="Code"
+        ></textarea>
+        <CodeSyntax
+          value={value}
+          height={height}
+          setReady={() => setReady(true)}
+        />
+      </div>
+    </>
   )
 }

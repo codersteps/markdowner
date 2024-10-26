@@ -7,8 +7,10 @@
 
 :root {
   --font-mono: var(--mdr-font-mono, monospace);
-  --main-bg-color: var(--mdr-bg-color, white);
-  --main-text-color: var(--mdr-text-color, black);
+  --main-bg-color: var(--mdr-bg-color, #fff);
+  --main-text-color: var(--mdr-text-color, #000);
+  --main-border-color: var(--mdr-main-border-color, #ededed);
+  --focus-border-color: var(--mdr-focus-border-color, #606f7b);
 }
 
 body {

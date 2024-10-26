@@ -91,7 +91,7 @@ export function MarkdownerBlocks() {
               </div>
             </div>
 
-            <div className="flex-grow">
+            <div className={cn('flex-grow', `mdr-${block.type}`)}>
               <MarkdownerBlock block={block} />
             </div>
           </div>
