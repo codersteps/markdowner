@@ -1,9 +1,9 @@
-import autosize from 'autosize'
 import { cn, langs } from '@/lib'
 import { Code, Lang } from '@/types'
 import { CodeSyntax } from './CodeSyntax'
+import { useContext, useState } from 'react'
+import { AutosizeTextarea } from '@/components'
 import { MarkdownerContext, useMarkdowner } from '@/core'
-import { useContext, useEffect, useState, useCallback } from 'react'
 
 type Props = {
   value: Code
@@ -14,25 +14,6 @@ export function CodeInput({ value }: Props) {
   const [ready, setReady] = useState(false)
   const [height, setHeight] = useState<string>('auto')
   const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(value)
-
-  const handleAutosizeResized = useCallback(() => {
-    console.log((ref.current as HTMLTextAreaElement).style.height)
-
-    setHeight((ref.current as HTMLTextAreaElement).style.height)
-  }, [ref])
-
-  useEffect(() => {
-    const textArea = ref.current as HTMLTextAreaElement
-
-    autosize(textArea)
-    setHeight(textArea.style.height)
-    textArea.addEventListener('autosize:resized', handleAutosizeResized)
-
-    return function () {
-      autosize.destroy(textArea)
-      textArea.removeEventListener('autosize:resized', handleAutosizeResized)
-    }
-  }, [ref, handleAutosizeResized])
 
   return (
     <>
@@ -70,7 +51,7 @@ export function CodeInput({ value }: Props) {
         className={cn('code-input', ready ? '--initialized' : '')}
         style={{ height }}
       >
-        <textarea
+        <AutosizeTextarea
           ref={ref}
           value={value.text}
           spellCheck="false"
@@ -83,9 +64,10 @@ export function CodeInput({ value }: Props) {
           }}
           onBlur={handleBlur}
           onFocus={handleFocus}
+          setHeight={setHeight}
           onKeyDown={handleKeyDown}
           placeholder="Code"
-        ></textarea>
+        />
         <CodeSyntax
           value={value}
           height={height}

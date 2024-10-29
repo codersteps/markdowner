@@ -1,6 +1,6 @@
-import autosize from 'autosize'
+import { useContext } from 'react'
 import { Paragraph } from '@/types'
-import { useEffect, useContext } from 'react'
+import { AutosizeTextarea } from '@/components'
 import { MarkdownerContext, useMarkdowner } from '@/core'
 
 type Props = {
@@ -12,12 +12,8 @@ export function ParagraphInput({ value, charactersPerRow = 81 }: Props) {
   const { dispatch } = useContext(MarkdownerContext)
   const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(value)
 
-  useEffect(() => {
-    autosize(ref.current as HTMLTextAreaElement)
-  }, [ref])
-
   return (
-    <textarea
+    <AutosizeTextarea
       ref={ref}
       rows={Math.ceil(value.text.length / charactersPerRow)}
       value={value.text}
