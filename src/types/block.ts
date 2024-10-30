@@ -44,11 +44,28 @@ export type Lang =
 
 export interface Code {
   id: string
-  type: 'code'
   lang: Lang
+  type: 'code'
   text: string
   html?: string
   filename: string
+}
+
+export type ListItem = {
+  text: string
+  subItems?: ListContent
+}
+
+export type ListContent = {
+  type: 'ordered' | 'unordered'
+  items: ListItem[]
+}
+
+export type List = {
+  id: string
+  type: 'list'
+  html?: string
+  content: ListContent
 }
 
 export type Picture = {
@@ -59,4 +76,4 @@ export type Picture = {
   caption: string
 }
 
-export type Block = Code | Paragraph | Picture | Heading
+export type Block = Code | List | Paragraph | Picture | Heading

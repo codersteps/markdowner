@@ -5,6 +5,7 @@ import {
   useImperativeHandle,
   TextareaHTMLAttributes,
 } from 'react'
+import { cn } from '@/lib'
 import autosize from 'autosize'
 
 type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -12,7 +13,7 @@ type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
 }
 
 export const AutosizeTextarea = forwardRef<HTMLTextAreaElement, Props>(
-  function AutosizeTextarea({ setHeight, ...props }: Props, ref) {
+  function AutosizeTextarea({ setHeight, className, ...props }: Props, ref) {
     const textareaRef = useRef<HTMLTextAreaElement>(null)
 
     useEffect(() => {
@@ -41,6 +42,15 @@ export const AutosizeTextarea = forwardRef<HTMLTextAreaElement, Props>(
       return textareaRef.current as HTMLTextAreaElement
     }, [])
 
-    return <textarea ref={textareaRef} {...props} />
+    return (
+      <textarea
+        ref={textareaRef}
+        className={cn(
+          'block w-full placeholder:text-plumbeous resize-none focus:outline-none',
+          className,
+        )}
+        {...props}
+      />
+    )
   },
 )

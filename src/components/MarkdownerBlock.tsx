@@ -1,6 +1,12 @@
+import {
+  ListInput,
+  CodeInput,
+  PictureInput,
+  HeadingInput,
+  ParagraphInput,
+} from '@/blocks'
 import { memo } from 'react'
 import { Block } from '@/types'
-import { ParagraphInput, HeadingInput, CodeInput, PictureInput } from '@/blocks'
 
 export const MarkdownerBlock = memo(function MarkdownerBlock({
   block,
@@ -13,6 +19,9 @@ export const MarkdownerBlock = memo(function MarkdownerBlock({
 
     case 'heading':
       return <HeadingInput value={block} />
+
+    case 'list':
+      return <ListInput value={block} />
 
     case 'picture':
       return <PictureInput value={block} />
