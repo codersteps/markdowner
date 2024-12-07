@@ -6,15 +6,16 @@ import { AutosizeTextarea } from '@/components'
 import { OrderedListItem } from './OrderedListItem'
 
 type Props = {
-  isChild: boolean
   items: List['content']['items']
+  isChild: boolean
 }
 
 export const UnorderedListItem = memo(function UnorderedListItem({
   items,
   isChild,
 }: Props) {
-  const { handleBlur, handleFocus, handleKeyDown } = useList()
+  const { handleBlur, handleFocus, handleKeyDown, handleOnItemChange } =
+    useList()
 
   return (
     <ul className={cn('space-y-1', isChild ? 'ps-5' : '')}>
@@ -23,13 +24,12 @@ export const UnorderedListItem = memo(function UnorderedListItem({
           <div className="flex space-x-1">
             <div className="text-xl leading-6 whitespace-nowrap">&bull;</div>
             <AutosizeTextarea
+              id={item.id}
               rows={1}
               value={item.text}
-              onChange={(e) => {
-                console.log(e)
-              }}
               onBlur={handleBlur}
               onFocus={handleFocus}
+              onChange={handleOnItemChange}
               onKeyDown={handleKeyDown}
             />
           </div>

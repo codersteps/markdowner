@@ -1,12 +1,12 @@
 import { MarkdownerProps } from '@/types'
-import { MarkdownerProvider, uniqueId } from '@/core'
+import { MarkdownerProvider } from '@/core'
 import { MarkdownerToolbar, MarkdownerBlocks } from '@/components'
 
 export function Markdowner({
   onUpload,
   initialBlocks = [
     {
-      id: uniqueId(),
+      id: 'cmlnm',
       text: `setTimeout(() => {
   element.selectionEnd = cursor + tabSpaces.length
   element.selectionStart = cursor + tabSpaces.length
@@ -17,42 +17,55 @@ export function Markdowner({
       html: '',
     },
     {
-      id: uniqueId(),
+      id: 'hwoqr',
       text: `This snippet will change the selection to the next indented value.`,
       type: 'paragraph',
       html: '',
     },
     {
-      id: uniqueId(),
+      id: 'bbpiki',
       type: 'list',
       html: '',
       content: {
         type: 'unordered',
         items: [
           {
+            id: 'ueksj',
             text: 'The forest is filled with various types of trees.',
             subItems: {
               type: 'ordered',
               items: [
                 {
+                  id: 'ueksl',
                   text: 'Among the tallest are the evergreen pines.',
                   subItems: {
                     type: 'unordered',
                     items: [
-                      { text: 'Pine cones litter the forest floor.' },
                       {
+                        id: 'ueksi',
+                        text: 'Pine cones litter the forest floor.',
+                      },
+                      {
+                        id: 'uekse',
                         text: 'The pine needles create a soft carpet underfoot.',
                       },
                     ],
                   },
                 },
                 {
+                  id: 'ueese',
                   text: 'Oaks, on the other hand, spread wide branches.',
                   subItems: {
                     type: 'unordered',
                     items: [
-                      { text: 'Their leaves turn vibrant shades in autumn.' },
-                      { text: 'Acorns fall and feed many woodland creatures.' },
+                      {
+                        id: 'uekue',
+                        text: 'Their leaves turn vibrant shades in autumn.',
+                      },
+                      {
+                        id: 'uejse',
+                        text: 'Acorns fall and feed many woodland creatures.',
+                      },
                     ],
                   },
                 },
@@ -60,27 +73,42 @@ export function Markdowner({
             },
           },
           {
+            id: 'uerse',
             text: 'The forest is home to many animals.',
             subItems: {
               type: 'unordered',
               items: [
                 {
+                  id: 'ueqse',
                   text: 'Deer wander quietly, blending with the trees.',
                   subItems: {
                     type: 'ordered',
                     items: [
-                      { text: 'They graze on grass and small plants.' },
-                      { text: 'They are often seen at dawn and dusk.' },
+                      {
+                        id: 'oekse',
+                        text: 'They graze on grass and small plants.',
+                      },
+                      {
+                        id: 'uikse',
+                        text: 'They are often seen at dawn and dusk.',
+                      },
                     ],
                   },
                 },
                 {
+                  id: 'vekse',
                   text: 'Birds of all colors fill the canopy.',
                   subItems: {
                     type: 'ordered',
                     items: [
-                      { text: 'Some build nests high up in the branches.' },
-                      { text: 'Others search for insects in the bark.' },
+                      {
+                        id: 'zekse',
+                        text: 'Some build nests high up in the branches.',
+                      },
+                      {
+                        id: 'wekse',
+                        text: 'Others search for insects in the bark.',
+                      },
                     ],
                   },
                 },
@@ -88,31 +116,40 @@ export function Markdowner({
             },
           },
           {
+            id: 'uepse',
             text: 'The forest floor is a world of its own.',
             subItems: {
               type: 'ordered',
               items: [
                 {
+                  id: 'ueose',
                   text: 'Moss and fungi cover fallen logs.',
                   subItems: {
                     type: 'unordered',
                     items: [
                       {
+                        id: 'uemse',
                         text: 'Mushrooms of various colors sprout after rain.',
                       },
                       {
+                        id: 'uense',
                         text: 'Tiny insects scuttle through the underbrush, Tiny insects scuttle through the underbrush.',
                       },
                     ],
                   },
                 },
                 {
+                  id: 'udkse',
                   text: 'Leaves decompose, enriching the soil.',
                   subItems: {
                     type: 'unordered',
                     items: [
-                      { text: 'Earthworms tunnel and aerate the ground.' },
                       {
+                        id: 'ufkse',
+                        text: 'Earthworms tunnel and aerate the ground.',
+                      },
+                      {
+                        id: 'ugkse',
                         text: 'Nutrients are recycled back into the ecosystem.',
                       },
                     ],

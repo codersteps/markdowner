@@ -7,6 +7,7 @@ import {
 } from '@/core'
 import {
   Block,
+  ListItem,
   MarkdownerState,
   MarkdownerElement,
   MarkdownerElements,
@@ -239,6 +240,32 @@ export function buildBlocksManager(elements: MarkdownerElements) {
       this.activate(draft, block)
       this.toggleTooltip(draft, block)
       elements.get(block.id)?.focus()
+    },
+
+    updateListItem(draft: MarkdownerState, path: string, value: string) {
+      const draftBlock = draft.blocks.find(
+        ({ id }) => id === draft.activeBlockId,
+      )
+
+      if (!draftBlock || draftBlock.type !== 'list') {
+        return
+      }
+
+      let item: ListItem | undefined
+      let items = draftBlock.content.items
+
+      for (const itemId of path.split('/')) {
+        item = items.find(({ id }) => id === itemId)
+        if (item && item.subItems) {
+          items = item.subItems.items
+        }
+      }
+
+      if (!item) {
+        return
+      }
+
+      item.text = value
     },
 
     toggleTooltip(draft: MarkdownerState, block: Block) {

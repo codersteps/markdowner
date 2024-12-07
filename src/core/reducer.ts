@@ -53,6 +53,9 @@ export function markdownerReducer(
         blocksManager.moveDown(draft, payload.block)
       }
       break
+    case 'UPDATE_LIST_ITEM':
+      blocksManager.updateListItem(draft, payload.path, payload.value)
+      break
     case 'TOGGLE_TOOLTIP':
       blocksManager.toggleTooltip(draft, payload.block)
       break

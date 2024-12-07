@@ -39,6 +39,11 @@ export type MoveBlock = {
   payload: { dir: 'up' | 'down'; block: Block }
 }
 
+export type UpdateListItem = {
+  type: 'UPDATE_LIST_ITEM'
+  payload: { path: string; value: string }
+}
+
 export type ToggleTooltip = {
   type: 'TOGGLE_TOOLTIP'
   payload: { block: Block }
@@ -54,4 +59,5 @@ export type MarkdownerAction =
   | UpdateBlock
   | RemoveBlock
   | MoveBlock
+  | UpdateListItem
   | ToggleTooltip

@@ -52,6 +52,7 @@ export interface Code {
 }
 
 export type ListItem = {
+  id: string
   text: string
   subItems?: ListContent
 }
