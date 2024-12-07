@@ -39,6 +39,18 @@ export type MoveBlock = {
   payload: { dir: 'up' | 'down'; block: Block }
 }
 
+export type KeyDownListItem = {
+  type: 'KEY_DOWN_LIST_ITEM'
+  payload: {
+    id: string
+    key: string
+    path: string
+    prevPath: string | undefined
+    nextPath: string | undefined
+    withShift: boolean
+    preventDefault(): void
+  }
+}
 export type UpdateListItem = {
   type: 'UPDATE_LIST_ITEM'
   payload: { path: string; value: string }
@@ -59,5 +71,6 @@ export type MarkdownerAction =
   | UpdateBlock
   | RemoveBlock
   | MoveBlock
+  | KeyDownListItem
   | UpdateListItem
   | ToggleTooltip

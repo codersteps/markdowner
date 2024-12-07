@@ -53,6 +53,18 @@ export function markdownerReducer(
         blocksManager.moveDown(draft, payload.block)
       }
       break
+    case 'KEY_DOWN_LIST_ITEM':
+      blocksManager.keyDownListItem(
+        draft,
+        payload.id,
+        payload.key,
+        payload.path,
+        payload.prevPath,
+        payload.nextPath,
+        payload.withShift,
+        payload.preventDefault,
+      )
+      break
     case 'UPDATE_LIST_ITEM':
       blocksManager.updateListItem(draft, payload.path, payload.value)
       break

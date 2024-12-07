@@ -242,6 +242,77 @@ export function buildBlocksManager(elements: MarkdownerElements) {
       elements.get(block.id)?.focus()
     },
 
+    keyDownListItem(
+      draft: MarkdownerState,
+      id: string,
+      key: string,
+      path: string,
+      prevPath: string | undefined,
+      nextPath: string | undefined,
+      withShift: boolean,
+      preventDefault: () => void,
+    ) {
+      let element = document.getElementById(id) as MarkdownerElement
+      let prevElement = prevPath
+        ? (document.getElementById(
+            prevPath.split('/').pop() as string,
+          ) as MarkdownerElement)
+        : undefined
+      let nextElement = nextPath
+        ? (document.getElementById(
+            nextPath.split('/').pop() as string,
+          ) as MarkdownerElement)
+        : undefined
+
+      draft.lastSelection = {
+        selectionStart: element.selectionStart,
+        selectionEnd: element.selectionEnd,
+      }
+
+      switch (key) {
+        case 'ArrowUp':
+        case 'ArrowLeft':
+          if (!element || !prevElement) {
+            break
+          }
+
+          if (!draft.lastSelection || draft.lastSelection.selectionEnd !== 0) {
+            break
+          }
+
+          prevElement.focus()
+          setTimeout(() => {
+            prevElement.setSelectionRange(
+              prevElement.value.length,
+              prevElement.value.length,
+            )
+          }, 0)
+          break
+        case 'ArrowDown':
+        case 'ArrowRight':
+          if (!element || !nextElement) {
+            break
+          }
+
+          if (
+            !draft.lastSelection ||
+            element.selectionEnd !== element.value.length ||
+            draft.lastSelection.selectionEnd !== element.value.length
+          ) {
+            break
+          }
+
+          nextElement.focus()
+          setTimeout(() => {
+            nextElement.setSelectionRange(
+              nextElement.value.length,
+              nextElement.value.length,
+            )
+          }, 0)
+          break
+      }
+    },
+
     updateListItem(draft: MarkdownerState, path: string, value: string) {
       const draftBlock = draft.blocks.find(
         ({ id }) => id === draft.activeBlockId,

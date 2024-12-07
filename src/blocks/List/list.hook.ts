@@ -32,13 +32,26 @@ export function useList() {
 
   const handleKeyDown = useCallback<KeyboardEventHandler<HTMLTextAreaElement>>(
     (e) => {
-      switch (e.key) {
-        case 'Enter':
-          e.preventDefault()
-          break
-      }
+      const id = e.currentTarget.id
+      const treeIdx = listTree.findIndex((p) => p.split('/').pop() === id)
+      const treeItem = listTree[treeIdx]
+      const prevTreeItem = listTree[treeIdx - 1] as string | undefined
+      const nextTreeItem = listTree[treeIdx + 1] as string | undefined
+
+      dispatch({
+        type: 'KEY_DOWN_LIST_ITEM',
+        payload: {
+          id,
+          key: e.key,
+          path: treeItem,
+          prevPath: prevTreeItem,
+          nextPath: nextTreeItem,
+          withShift: e.shiftKey,
+          preventDefault: () => e.preventDefault(),
+        },
+      })
     },
-    [],
+    [dispatch, listTree],
   )
 
   const handleOnItemChange = useCallback(
