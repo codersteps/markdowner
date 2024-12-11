@@ -7,11 +7,13 @@ import {
 } from '@/core'
 import {
   Block,
+  List,
   ListItem,
   MarkdownerState,
   MarkdownerElement,
   MarkdownerElements,
 } from '@/types'
+import { addListItem } from '@/blocks/List/list.func'
 
 export function buildBlocksManager(elements: MarkdownerElements) {
   return {
@@ -252,6 +254,13 @@ export function buildBlocksManager(elements: MarkdownerElements) {
       withShift: boolean,
       preventDefault: () => void,
     ) {
+      const block =
+        (draft.blocks.find(({ id }) => id === draft.activeBlockId) as List) ||
+        undefined
+      if (!block) {
+        return
+      }
+
       let element = document.getElementById(id) as MarkdownerElement
       let prevElement = prevPath
         ? (document.getElementById(
@@ -270,6 +279,14 @@ export function buildBlocksManager(elements: MarkdownerElements) {
       }
 
       switch (key) {
+        case 'Tab':
+          preventDefault()
+          // TODO: nest active listItem, move it as a child
+          break
+        case 'Enter':
+          preventDefault()
+          addListItem(block, path)
+          break
         case 'ArrowUp':
         case 'ArrowLeft':
           if (!element || !prevElement) {
