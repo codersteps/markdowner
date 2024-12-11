@@ -3,6 +3,7 @@ import { memo } from 'react'
 import { List } from '@/types'
 import { useList } from './list.hook'
 import { AutosizeTextarea } from '@/components'
+import { ListTypeButton } from './ListTypeButton'
 import { OrderedListItem } from './OrderedListItem'
 
 type Props = {
@@ -22,7 +23,7 @@ export const UnorderedListItem = memo(function UnorderedListItem({
       {items.map((item, idx) => (
         <li className="space-y-1" key={idx}>
           <div className="flex space-x-1">
-            <div className="text-xl leading-6 whitespace-nowrap">&bull;</div>
+            <ListTypeButton>&bull;</ListTypeButton>
             <AutosizeTextarea
               id={item.id}
               rows={1}
