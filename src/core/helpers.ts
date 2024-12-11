@@ -1,7 +1,7 @@
 import { TAB_SPACES } from '@/core'
 
 export function uniqueId() {
-  return (Math.random() + 1).toString(36).substring(7)
+  return Math.random().toString(36).substring(5)
 }
 
 export function indentSingleLine(text: string, cursor: number) {
