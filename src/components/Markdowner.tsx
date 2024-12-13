@@ -66,6 +66,15 @@ export function Markdowner({
                         id: 'uejse',
                         text: 'Acorns fall and feed many woodland creatures.',
                       },
+
+                      {
+                        id: 'uejue',
+                        text: 'Squirrels gather and store nuts to prepare for winter.',
+                      },
+                      {
+                        id: 'uejke',
+                        text: 'The forest floor becomes a colorful carpet of fallen leaves.',
+                      },
                     ],
                   },
                 },

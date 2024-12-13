@@ -22,7 +22,7 @@ export const OrderedListItem = memo(function OrderedListItem({
     <ul className={cn('space-y-1', isChild ? 'ps-5' : '')}>
       {items.map((item, idx) => (
         <li className="space-y-1" key={idx}>
-          <div className="flex space-x-1">
+          <div className="flex items-center space-x-1">
             <ListTypeButton
               className={idx + 1 > 9 ? 'text-xs' : 'text-xs px-2'}
             >

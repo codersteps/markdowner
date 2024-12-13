@@ -4,6 +4,15 @@ export function uniqueId() {
   return Math.random().toString(36).substring(5)
 }
 
+export function logProxies(args: { [k in string]: any }) {
+  for (const arg in args) {
+    console.log(
+      arg + ':',
+      args[arg] ? JSON.parse(JSON.stringify(args[arg])) : undefined,
+    )
+  }
+}
+
 export function indentSingleLine(text: string, cursor: number) {
   const tabLeftText = text.substring(0, cursor)
   const tabRightText = text.substring(cursor)

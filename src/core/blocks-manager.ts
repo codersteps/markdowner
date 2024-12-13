@@ -13,7 +13,7 @@ import {
   MarkdownerElement,
   MarkdownerElements,
 } from '@/types'
-import { addListItem } from '@/blocks/List/list.func'
+import { addListItem, nestListItem } from '@/blocks/List/list.func'
 
 export function buildBlocksManager(elements: MarkdownerElements) {
   return {
@@ -281,7 +281,7 @@ export function buildBlocksManager(elements: MarkdownerElements) {
       switch (key) {
         case 'Tab':
           preventDefault()
-          // TODO: nest active listItem, move it as a child
+          nestListItem(block, path, withShift)
           break
         case 'Enter':
           preventDefault()
