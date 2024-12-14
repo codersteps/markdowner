@@ -293,7 +293,14 @@ export function buildBlocksManager(elements: MarkdownerElements) {
           break
         case 'Enter':
           preventDefault()
-          addListItem(block, path)
+          if (!addListItem(block, path)) {
+            this.insert(draft, {
+              id: uniqueId(),
+              text: '',
+              type: 'paragraph',
+              html: '',
+            })
+          }
           break
         case 'ArrowUp':
         case 'ArrowLeft':

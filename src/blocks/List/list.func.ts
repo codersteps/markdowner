@@ -1,4 +1,4 @@
-import { logProxies, uniqueId } from '@/core'
+import { uniqueId } from '@/core'
 import { List, ListItem, MarkdownerElement } from '@/types'
 
 const activateListItemElement = (
@@ -24,6 +24,7 @@ const getListItemMeta = (draftBlock: List, path: string) => {
   let idx = -1
   let item: ListItem = { id: '', text: '' }
   let items = draftBlock.content.items
+  let isLast = false
   let isParent = false
   let rootItemIdx = -1
   const parents: ListItem[] = []
@@ -33,6 +34,7 @@ const getListItemMeta = (draftBlock: List, path: string) => {
     const foundItem = items.find(({ id }, i) => {
       if (id === itemId) {
         idx = i
+        isLast = i === items.length - 1
         if (rootItemIdx === -1) {
           rootItemIdx = i
         }
@@ -62,33 +64,57 @@ const getListItemMeta = (draftBlock: List, path: string) => {
     idx,
     item,
     parents,
+    isLast,
     isParent,
-    insertInRoot(selection?: { selectionStart: number; selectionEnd: number }) {
-      if (!parents[0] || !parents[0].subItems) {
-        throw `No parents with subItems were found!`
+    insertInRoot(
+      newItem?: ListItem,
+      selection?: { selectionStart: number; selectionEnd: number },
+    ) {
+      if (newItem) {
+        draftBlock.content.items.splice(rootItemIdx + 1, 0, newItem)
+        activateListItemElement(newItem.id, selection)
+      } else if (parents[0] && parents[0].subItems) {
+        parents[0].subItems.items.splice(idx, 1)
+        draftBlock.content.items.splice(rootItemIdx + 1, 0, item)
+        activateListItemElement(item.id, selection)
       }
-
-      parents[0].subItems.items.splice(idx, 1)
-      draftBlock.content.items.splice(rootItemIdx + 1, 0, item)
-      activateListItemElement(item.id, selection)
+    },
+    removeFromRoot() {
+      draftBlock.content.items.splice(idx, 1)
     },
   }
 }
 
-export const addListItem = (draftBlock: List, path: string) => {
+export const addListItem = (draftBlock: List, path: string): boolean => {
   const newItem = { id: uniqueId(), text: '' }
-  const { idx, item, parents, isParent } = getListItemMeta(draftBlock, path)
+  const { idx, item, parents, isLast, isParent, insertInRoot, removeFromRoot } =
+    getListItemMeta(draftBlock, path)
+  const [parent] = parents.slice(-1)
 
-  if (isParent) {
-    item.subItems?.items.splice(0, 0, newItem)
-    activateListItemElement(newItem.id)
-    return
+  if (isLast && item.text.trim() === '') {
+    if (parent) {
+      unnestListItem(draftBlock, path)
+      return true
+    }
+
+    removeFromRoot()
+    return false
   }
 
-  for (const parent of parents.slice(-1)) {
+  if (isParent && item.subItems) {
+    item.subItems.items.splice(0, 0, newItem)
+    activateListItemElement(newItem.id)
+    return true
+  }
+
+  if (parent) {
     parent.subItems?.items.splice(idx + 1, 0, newItem)
     activateListItemElement(newItem.id)
+    return true
   }
+
+  insertInRoot(newItem)
+  return true
 }
 
 export const nestListItem = (draftBlock: List, path: string) => {
@@ -140,7 +166,7 @@ export const unnestListItem = (draftBlock: List, path: string) => {
     }
 
     if (!unnested) {
-      insertInRoot({ selectionStart, selectionEnd })
+      insertInRoot(undefined, { selectionStart, selectionEnd })
     }
   }
 }
