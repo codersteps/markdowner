@@ -1,9 +1,11 @@
+@use 'sass:meta';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import './blocks/Code/code-input.scss';
 @import 'cropperjs/dist/cropper.min.css';
+@include meta.load-css('blocks/Code/code-input.scss');
 
 :root {
   --font-mono: var(--mdr-font-mono, monospace);

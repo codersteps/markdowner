@@ -11,7 +11,7 @@ type Props = {
 export function CodeSyntax({ value, height, setReady }: Props) {
   const [syntax, setSyntax] = useState('')
   const [preClassName, setPreClassName] = useState('')
-  const codeToHtmlRef = useRef<CreateShiki['codeToHtml']>()
+  const codeToHtmlRef = useRef<CreateShiki['codeToHtml'] | null>(null)
 
   const codeToSyntax = useCallback(() => {
     if (codeToHtmlRef.current) {

@@ -38,7 +38,7 @@ export default function ListAction() {
                   html: '',
                   content: {
                     type: 'unordered',
-                    items: [{ text: '' }],
+                    items: [{ id: uniqueId(), text: '' }],
                   },
                 },
               },
@@ -61,7 +61,7 @@ export default function ListAction() {
                   html: '',
                   content: {
                     type: 'ordered',
-                    items: [{ text: '' }],
+                    items: [{ id: uniqueId(), text: '' }],
                   },
                 },
               },

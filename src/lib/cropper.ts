@@ -1,5 +1,3 @@
-'use client'
-
 import { toastr } from '@/lib'
 import Cropper from 'cropperjs'
 import { useCallback, useEffect, useRef, useState } from 'react'
