@@ -98,7 +98,24 @@ const getListItemMeta = (draftBlock: List, path: string) => {
       }
     },
     removeFromRoot() {
+      let prevItem = draftBlock.content.items[idx - 1]
+      if (!prevItem) {
+        return false
+      }
+
       draftBlock.content.items.splice(idx, 1)
+
+      if (!prevItem.subItems) {
+        activateListItemElement(prevItem.id)
+        return true
+      }
+
+      while (prevItem.subItems) {
+        prevItem = prevItem.subItems.items[prevItem.subItems.items.length - 1]
+      }
+
+      activateListItemElement(prevItem.id)
+      return true
     },
     updateRootType(type: ListContent['type']) {
       draftBlock.content.type = type
@@ -136,6 +153,39 @@ export const addListItem = (draftBlock: List, path: string): boolean => {
 
   insertInRoot(newItem)
   return true
+}
+
+export const removeListItem = (draftBlock: List, path: string): boolean => {
+  const { idx, item, parents, removeFromRoot } = getListItemMeta(
+    draftBlock,
+    path,
+  )
+
+  if (item.text !== '') {
+    return false
+  }
+
+  const [parent] = parents.slice(-1)
+  if (parent && parent.subItems) {
+    const prevItem = parent.subItems.items[idx - 1]
+    if (!prevItem) {
+      return false
+    }
+
+    parent.subItems.items.splice(idx, 1)
+
+    if (prevItem.subItems) {
+      activateListItemElement(
+        prevItem.subItems.items[prevItem.subItems.items.length - 1].id,
+      )
+    } else {
+      activateListItemElement(prevItem.id)
+    }
+
+    return true
+  } else {
+    return removeFromRoot()
+  }
 }
 
 export const nestListItem = (draftBlock: List, path: string) => {

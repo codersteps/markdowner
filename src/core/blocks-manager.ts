@@ -16,6 +16,7 @@ import {
 import {
   addListItem,
   nestListItem,
+  removeListItem,
   unnestListItem,
   updateListItemType,
 } from '@/blocks/List/list.func'
@@ -299,6 +300,11 @@ export function buildBlocksManager(elements: MarkdownerElements) {
               type: 'paragraph',
               html: '',
             })
+          }
+          break
+        case 'Backspace':
+          if (removeListItem(block, path)) {
+            preventDefault()
           }
           break
         case 'ArrowUp':
