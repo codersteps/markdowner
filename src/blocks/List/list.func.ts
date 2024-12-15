@@ -1,5 +1,5 @@
 import { uniqueId } from '@/core'
-import { List, ListItem, MarkdownerElement } from '@/types'
+import { List, ListContent, ListItem, MarkdownerElement } from '@/types'
 
 const activateListItemElement = (
   id: string,
@@ -100,6 +100,9 @@ const getListItemMeta = (draftBlock: List, path: string) => {
     removeFromRoot() {
       draftBlock.content.items.splice(idx, 1)
     },
+    updateRootType(type: ListContent['type']) {
+      draftBlock.content.type = type
+    },
   }
 }
 
@@ -186,4 +189,21 @@ export const unnestListItem = (draftBlock: List, path: string) => {
       insertInRoot(undefined, { selectionStart, selectionEnd })
     }
   }
+}
+
+export const updateListItemType = (
+  draftBlock: List,
+  path: string,
+  type: ListContent['type'],
+) => {
+  const { item, parents, updateRootType } = getListItemMeta(draftBlock, path)
+
+  const [parent] = parents.slice(-1)
+  if (parent && parent.subItems) {
+    parent.subItems.type = type
+  } else {
+    updateRootType(type)
+  }
+
+  activateListItemElement(item.id)
 }

@@ -1,16 +1,29 @@
 import {
   useContext,
   useCallback,
-  FocusEventHandler,
-  KeyboardEventHandler,
   ChangeEvent,
+  FocusEventHandler,
+  MouseEventHandler,
+  KeyboardEventHandler,
 } from 'react'
 import { MarkdownerContext } from '@/core'
 import { ListContext } from './list.context'
+import { ListContent, MarkdownerElement } from '@/types'
 
 export function useList() {
   const { block, listTree } = useContext(ListContext)
   const { state, dispatch } = useContext(MarkdownerContext)
+
+  const setActiveBlockId = (id: string) => {
+    return new Promise((res) => {
+      setTimeout(() => {
+        const element = document.getElementById(id) as MarkdownerElement
+        element.setSelectionRange(element.selectionStart, element.selectionEnd)
+        element.focus()
+        res(undefined)
+      })
+    })
+  }
 
   const handleBlur = useCallback<FocusEventHandler<HTMLTextAreaElement>>(
     (e) => {
@@ -74,10 +87,33 @@ export function useList() {
     [dispatch, block, listTree, state.activeBlockId],
   )
 
+  const toggleItemType = useCallback<MouseEventHandler<HTMLButtonElement>>(
+    (e) => {
+      e.preventDefault()
+      const id = e.currentTarget.dataset.itemId as string
+      const type = e.currentTarget.dataset.itemType as ListContent['type']
+
+      setActiveBlockId(id).then(() => {
+        const treeIdx = listTree.findIndex((p) => p.split('/').pop() === id)
+        const treeItem = listTree[treeIdx]
+
+        dispatch({
+          type: 'UPDATE_LIST_ITEM_TYPE',
+          payload: {
+            path: treeItem,
+            type: type === 'ordered' ? 'unordered' : 'ordered',
+          },
+        })
+      })
+    },
+    [dispatch, listTree],
+  )
+
   return {
     handleBlur,
     handleFocus,
     handleKeyDown,
+    toggleItemType,
     handleOnItemChange,
   }
 }

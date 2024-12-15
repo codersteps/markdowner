@@ -20,33 +20,48 @@ export const OrderedListItem = memo(function OrderedListItem({
 
   return (
     <ul className={cn('space-y-1', isChild ? 'ps-5' : '')}>
-      {items.map((item, idx) => (
-        <li className="space-y-1" key={idx}>
-          <div className="flex items-center space-x-1">
-            <ListTypeButton
-              className={idx + 1 > 9 ? 'text-xs' : 'text-xs px-2'}
-            >
-              {idx + 1}
-            </ListTypeButton>
-            <AutosizeTextarea
-              id={item.id}
-              rows={1}
-              value={item.text}
-              onBlur={handleBlur}
-              onFocus={handleFocus}
-              onChange={handleOnItemChange}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
+      {items.map((item, idx) => {
+        let className = 'text-xs leading-[22px]'
+        const listNumber = idx + 1
 
-          {item.subItems &&
-            (item.subItems.type === 'unordered' ? (
-              <UnorderedListItem items={item.subItems.items} isChild={true} />
-            ) : (
-              <OrderedListItem items={item.subItems.items} isChild={true} />
-            ))}
-        </li>
-      ))}
+        if (listNumber > 9 && listNumber < 100) {
+          className += ' min-w-8'
+        }
+
+        if (listNumber > 99 && listNumber < 1000) {
+          className += ' min-w-9'
+        }
+
+        return (
+          <li className="space-y-1" key={idx}>
+            <div className="flex items-center space-x-1">
+              <ListTypeButton
+                itemId={item.id}
+                itemType="ordered"
+                className={className}
+              >
+                {idx + 1}
+              </ListTypeButton>
+              <AutosizeTextarea
+                id={item.id}
+                rows={1}
+                value={item.text}
+                onBlur={handleBlur}
+                onFocus={handleFocus}
+                onChange={handleOnItemChange}
+                onKeyDown={handleKeyDown}
+              />
+            </div>
+
+            {item.subItems &&
+              (item.subItems.type === 'unordered' ? (
+                <UnorderedListItem items={item.subItems.items} isChild={true} />
+              ) : (
+                <OrderedListItem items={item.subItems.items} isChild={true} />
+              ))}
+          </li>
+        )
+      })}
     </ul>
   )
 })

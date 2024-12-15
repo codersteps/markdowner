@@ -1,4 +1,4 @@
-import { Block, MarkdownerElement } from '@/types'
+import { Block, ListContent, MarkdownerElement } from '@/types'
 
 export type KeyDown = {
   type: 'KEY_DOWN'
@@ -55,6 +55,10 @@ export type UpdateListItem = {
   type: 'UPDATE_LIST_ITEM'
   payload: { path: string; value: string }
 }
+export type UpdateListItemType = {
+  type: 'UPDATE_LIST_ITEM_TYPE'
+  payload: { path: string; type: ListContent['type'] }
+}
 
 export type ToggleTooltip = {
   type: 'TOGGLE_TOOLTIP'
@@ -73,4 +77,5 @@ export type MarkdownerAction =
   | MoveBlock
   | KeyDownListItem
   | UpdateListItem
+  | UpdateListItemType
   | ToggleTooltip

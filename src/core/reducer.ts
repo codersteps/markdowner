@@ -68,6 +68,9 @@ export function markdownerReducer(
     case 'UPDATE_LIST_ITEM':
       blocksManager.updateListItem(draft, payload.path, payload.value)
       break
+    case 'UPDATE_LIST_ITEM_TYPE':
+      blocksManager.updateListItemType(draft, payload.path, payload.type)
+      break
     case 'TOGGLE_TOOLTIP':
       blocksManager.toggleTooltip(draft, payload.block)
       break

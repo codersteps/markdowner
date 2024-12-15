@@ -23,7 +23,9 @@ export const UnorderedListItem = memo(function UnorderedListItem({
       {items.map((item, idx) => (
         <li className="space-y-1" key={idx}>
           <div className="flex items-center space-x-1">
-            <ListTypeButton>&bull;</ListTypeButton>
+            <ListTypeButton itemId={item.id} itemType="unordered">
+              &bull;
+            </ListTypeButton>
             <AutosizeTextarea
               id={item.id}
               rows={1}

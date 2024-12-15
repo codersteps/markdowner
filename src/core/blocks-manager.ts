@@ -7,8 +7,8 @@ import {
 } from '@/core'
 import {
   Block,
-  List,
   ListItem,
+  ListContent,
   MarkdownerState,
   MarkdownerElement,
   MarkdownerElements,
@@ -17,6 +17,7 @@ import {
   addListItem,
   nestListItem,
   unnestListItem,
+  updateListItemType,
 } from '@/blocks/List/list.func'
 
 export function buildBlocksManager(elements: MarkdownerElements) {
@@ -258,10 +259,8 @@ export function buildBlocksManager(elements: MarkdownerElements) {
       withShift: boolean,
       preventDefault: () => void,
     ) {
-      const block =
-        (draft.blocks.find(({ id }) => id === draft.activeBlockId) as List) ||
-        undefined
-      if (!block) {
+      const block = draft.blocks.find(({ id }) => id === draft.activeBlockId)
+      if (!block || block.type !== 'list') {
         return
       }
 
@@ -369,6 +368,18 @@ export function buildBlocksManager(elements: MarkdownerElements) {
       }
 
       item.text = value
+    },
+
+    updateListItemType(
+      draft: MarkdownerState,
+      path: string,
+      type: ListContent['type'],
+    ) {
+      const block = draft.blocks.find(({ id }) => id === draft.activeBlockId)
+      if (!block || block.type !== 'list') {
+        return
+      }
+      updateListItemType(block, path, type)
     },
 
     toggleTooltip(draft: MarkdownerState, block: Block) {

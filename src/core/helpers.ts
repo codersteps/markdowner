@@ -8,7 +8,9 @@ export function logProxies(args: { [k in string]: any }) {
   for (const arg in args) {
     console.log(
       arg + ':',
-      args[arg] ? JSON.parse(JSON.stringify(args[arg])) : undefined,
+      typeof args[arg] === 'undefined'
+        ? undefined
+        : JSON.parse(JSON.stringify(args[arg])),
     )
   }
 }
