@@ -22,7 +22,7 @@ export const UnorderedListItem = memo(function UnorderedListItem({
     <ul className={cn('space-y-1.5', isChild ? 'ps-5' : '')}>
       {items.map((item, idx) => (
         <li className="space-y-1" key={idx}>
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-start space-x-1.5">
             <ListTypeButton itemId={item.id} itemType="unordered">
               &bull;
             </ListTypeButton>
