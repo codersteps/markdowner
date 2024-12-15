@@ -66,6 +66,24 @@ const getListItemMeta = (draftBlock: List, path: string) => {
     parents,
     isLast,
     isParent,
+    nestFromRoot() {
+      const { selectionStart, selectionEnd } = document.getElementById(
+        item.id,
+      ) as MarkdownerElement
+      const prevItem = draftBlock.content.items[rootItemIdx - 1]
+      if (prevItem) {
+        draftBlock.content.items.splice(idx, 1)
+        if (prevItem.subItems) {
+          prevItem.subItems.items.push(item)
+        } else {
+          prevItem.subItems = {
+            type: draftBlock.content.type,
+            items: [item],
+          }
+        }
+        activateListItemElement(item.id, { selectionStart, selectionEnd })
+      }
+    },
     insertInRoot(
       newItem?: ListItem,
       selection?: { selectionStart: number; selectionEnd: number },
@@ -118,16 +136,13 @@ export const addListItem = (draftBlock: List, path: string): boolean => {
 }
 
 export const nestListItem = (draftBlock: List, path: string) => {
-  const { idx, item, parents } = getListItemMeta(draftBlock, path)
+  const { idx, item, parents, nestFromRoot } = getListItemMeta(draftBlock, path)
   const { selectionStart, selectionEnd } = document.getElementById(
     item.id,
   ) as MarkdownerElement
 
-  for (const parent of parents.slice(-1)) {
-    if (!parent.subItems) {
-      continue
-    }
-
+  const [parent] = parents.slice(-1)
+  if (parent && parent.subItems) {
     const prevItem = parent.subItems.items[idx - 1]
     if (prevItem) {
       parent.subItems.items.splice(idx, 1)
@@ -141,6 +156,8 @@ export const nestListItem = (draftBlock: List, path: string) => {
       }
       activateListItemElement(item.id, { selectionStart, selectionEnd })
     }
+  } else {
+    nestFromRoot()
   }
 }
 
