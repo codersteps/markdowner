@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@abdessamadely/markdowner": "^0.0.3",
+    "@abdessamadely/markdowner": "^0.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

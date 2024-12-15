@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@abdessamadely/markdowner':
-        specifier: ^0.0.3
-        version: 0.0.3(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: ^0.0.4
+        version: 0.0.4(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -54,8 +54,8 @@ importers:
 
 packages:
 
-  '@abdessamadely/markdowner@0.0.3':
-    resolution: {integrity: sha512-NnHM0DI1uHeBuaeMdjQH8W3KteP7VihntRK2pw+3ZnB0Lff0ETeecMve6PqnYYwoW07/xNMsA3hY7+k3Xh58Uw==}
+  '@abdessamadely/markdowner@0.0.4':
+    resolution: {integrity: sha512-UdO9BdIkQnxhIFe61NS+q/Lv9TDUwd1umTNupl9WguG1z6Dc+zffbI7hHFuZHCOvckGqLrbI5tkCzOnpI6gNJg==}
     peerDependencies:
       immer: ^10.1.1
       react: ^19.0.0
@@ -1090,7 +1090,7 @@ packages:
 
 snapshots:
 
-  '@abdessamadely/markdowner@0.0.3(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@abdessamadely/markdowner@0.0.4(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@heroicons/react': 2.2.0(react@19.0.0)
       autosize: 6.0.1
