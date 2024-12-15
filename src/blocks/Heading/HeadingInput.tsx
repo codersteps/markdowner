@@ -12,6 +12,7 @@ export function HeadingInput({ value }: Props) {
 
   return (
     <input
+      id={value.id}
       ref={ref}
       value={value.text}
       onChange={(e) => {

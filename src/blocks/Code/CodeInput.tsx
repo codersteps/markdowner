@@ -19,6 +19,7 @@ export function CodeInput({ value }: Props) {
     <>
       <div className="code-header">
         <input
+          id={`filename-${value.id}`}
           type="text"
           placeholder="filename"
           value={value.filename}
@@ -32,6 +33,7 @@ export function CodeInput({ value }: Props) {
         />
         <div className="select-wrapper">
           <select
+            id={`lang-${value.id}`}
             value={value.lang}
             onChange={(e) => {
               const block = { ...value, lang: e.currentTarget.value as Lang }
@@ -52,6 +54,7 @@ export function CodeInput({ value }: Props) {
         style={{ height }}
       >
         <AutosizeTextarea
+          id={`code-${value.id}`}
           ref={ref}
           value={value.text}
           spellCheck="false"

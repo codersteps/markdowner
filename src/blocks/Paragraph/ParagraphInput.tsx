@@ -14,6 +14,7 @@ export function ParagraphInput({ value, charactersPerRow = 81 }: Props) {
 
   return (
     <AutosizeTextarea
+      id={value.id}
       ref={ref}
       rows={Math.ceil(value.text.length / charactersPerRow)}
       value={value.text}

@@ -142,6 +142,7 @@ export function PictureInput({ value }: Props) {
 
         <div className="space-y-1.5 text-xs">
           <input
+            id={`alt-${value.id}`}
             type="text"
             placeholder="Alt"
             value={value.alt}
@@ -154,6 +155,7 @@ export function PictureInput({ value }: Props) {
             className="block w-full transition-colors duration-300 py-1 px-1.5 bg-white border border-mercury placeholder:text-plumbeous focus:outline-none focus:border-plumbeous"
           />
           <input
+            id={`caption-${value.id}`}
             type="text"
             placeholder="Caption"
             value={value.caption}
