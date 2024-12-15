@@ -1,4 +1,6 @@
-export const initialBlocks = [
+import { Block } from '@abdessamadely/markdowner'
+
+export const initialBlocks: Block[] = [
   {
     id: 'cmlnm',
     text: `setTimeout(() => {
