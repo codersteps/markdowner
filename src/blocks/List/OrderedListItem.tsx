@@ -33,8 +33,8 @@ export const OrderedListItem = memo(function OrderedListItem({
         }
 
         return (
-          <li className="space-y-1" key={idx}>
-            <div className="flex items-center space-x-1">
+          <li className="space-y-1.5" key={idx}>
+            <div className="flex items-center space-x-1.5">
               <ListTypeButton
                 itemId={item.id}
                 itemType="ordered"
