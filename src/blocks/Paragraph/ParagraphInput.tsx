@@ -1,16 +1,23 @@
-import { useContext } from 'react'
-import { Paragraph } from '@/types'
+import { memo } from 'react'
+import { useMarkdowner } from '@/core'
 import { AutosizeTextarea } from '@/components'
-import { MarkdownerContext, useMarkdowner } from '@/core'
+import { MarkdownerAction, Paragraph } from '@/types'
 
 type Props = {
   value: Paragraph
+  dispatch(action: MarkdownerAction): void
   charactersPerRow?: number
 }
 
-export function ParagraphInput({ value, charactersPerRow = 81 }: Props) {
-  const { dispatch } = useContext(MarkdownerContext)
-  const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(value)
+export const ParagraphInput = memo(function ParagraphInput({
+  value,
+  dispatch,
+  charactersPerRow = 81,
+}: Props) {
+  const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(
+    value,
+    dispatch,
+  )
 
   return (
     <AutosizeTextarea
@@ -32,4 +39,4 @@ export function ParagraphInput({ value, charactersPerRow = 81 }: Props) {
       className="block w-full pb-3 bg-transparent placeholder:text-plumbeous resize-none focus:outline-none"
     />
   )
-}
+})

@@ -1,17 +1,17 @@
 import {
   useRef,
   useEffect,
-  useContext,
   useCallback,
   FocusEventHandler,
   KeyboardEventHandler,
 } from 'react'
-import { MarkdownerContext } from './context'
-import { Block, MarkdownerElement } from '../types'
+import { Block, MarkdownerAction, MarkdownerElement } from '../types'
 
-export function useMarkdowner(block: Block) {
+export function useMarkdowner(
+  block: Block,
+  dispatch: (action: MarkdownerAction) => void,
+) {
   const ref = useRef<MarkdownerElement>(null)
-  const { dispatch } = useContext(MarkdownerContext)
 
   const handleBlur = useCallback<FocusEventHandler<MarkdownerElement>>(
     (e) => {

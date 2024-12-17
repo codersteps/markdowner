@@ -1,25 +1,44 @@
-import { List, ListItem } from '@/types'
-import { ListContext } from './list.context'
+import { memo, useMemo } from 'react'
 import { OrderedListItem } from './OrderedListItem'
 import { UnorderedListItem } from './UnorderedListItem'
+import { List, ListItem, MarkdownerAction } from '@/types'
 
 type Props = {
   value: List
+  dispatch(action: MarkdownerAction): void
+  activeBlockId: string | null
 }
 
-export function ListInput({ value }: Props) {
-  return (
-    <ListContext.Provider
-      value={{ block: value, listTree: generateListTree(value.content.items) }}
-    >
-      {value.content.type === 'ordered' ? (
-        <OrderedListItem items={value.content.items} isChild={false} />
-      ) : (
-        <UnorderedListItem items={value.content.items} isChild={false} />
-      )}
-    </ListContext.Provider>
+export const ListInput = memo(function ListInput({
+  value,
+  dispatch,
+  activeBlockId,
+}: Props) {
+  const listTree = useMemo<string[]>(
+    () => generateListTree(value.content.items),
+    [value.content.items],
   )
-}
+
+  return value.content.type === 'ordered' ? (
+    <OrderedListItem
+      items={value.content.items}
+      block={value}
+      isChild={false}
+      dispatch={dispatch}
+      listTree={listTree}
+      activeBlockId={activeBlockId}
+    />
+  ) : (
+    <UnorderedListItem
+      items={value.content.items}
+      block={value}
+      listTree={listTree}
+      isChild={false}
+      dispatch={dispatch}
+      activeBlockId={activeBlockId}
+    />
+  )
+})
 
 const generateListTree = (items: ListItem[], currentPath = ''): string[] => {
   const listTree: string[] = []

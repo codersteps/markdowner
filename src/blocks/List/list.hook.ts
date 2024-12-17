@@ -1,19 +1,23 @@
 import {
-  useContext,
   useCallback,
   ChangeEvent,
   FocusEventHandler,
   MouseEventHandler,
   KeyboardEventHandler,
 } from 'react'
-import { MarkdownerContext } from '@/core'
-import { ListContext } from './list.context'
-import { ListContent, MarkdownerElement } from '@/types'
+import { List, ListContent, MarkdownerAction, MarkdownerElement } from '@/types'
 
-export function useList() {
-  const { block, listTree } = useContext(ListContext)
-  const { state, dispatch } = useContext(MarkdownerContext)
-
+export function useList({
+  block,
+  dispatch,
+  listTree,
+  activeBlockId,
+}: {
+  block: List
+  dispatch: (action: MarkdownerAction) => void
+  listTree: string[]
+  activeBlockId: string | null
+}) {
   const setActiveBlockId = (id: string) => {
     return new Promise((res) => {
       setTimeout(() => {
@@ -69,7 +73,7 @@ export function useList() {
 
   const handleOnItemChange = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
-      if (!block || !state.activeBlockId || state.activeBlockId !== block.id) {
+      if (!block || !activeBlockId || activeBlockId !== block.id) {
         return
       }
 
@@ -84,7 +88,7 @@ export function useList() {
         })
       }
     },
-    [dispatch, block, listTree, state.activeBlockId],
+    [dispatch, block, listTree, activeBlockId],
   )
 
   const toggleItemType = useCallback<MouseEventHandler<HTMLButtonElement>>(

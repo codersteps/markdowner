@@ -1,10 +1,10 @@
-import { useContext } from 'react'
+import { uniqueId } from '@/core'
+import { AddBlock } from '@/types'
 import { ToolbarButton } from '@/components'
-import { MarkdownerContext, uniqueId } from '@/core'
 
-export function ParagraphAction() {
-  const { dispatch } = useContext(MarkdownerContext)
+type Props = { dispatch(action: AddBlock): void }
 
+export function ParagraphAction({ dispatch }: Props) {
   return (
     <ToolbarButton
       title="Insert New Paragraph"

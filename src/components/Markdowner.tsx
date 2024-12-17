@@ -3,7 +3,7 @@ import { MarkdownerProvider, uniqueId } from '@/core'
 import { MarkdownerToolbar, MarkdownerBlocks } from '@/components'
 
 export function Markdowner({
-  onUpload,
+  handleUpload,
   initialBlocks = [
     {
       id: uniqueId(),
@@ -13,7 +13,9 @@ export function Markdowner({
   ],
 }: MarkdownerProps) {
   return (
-    <MarkdownerProvider value={{ initialBlocks, onUpload }}>
+    <MarkdownerProvider
+      value={{ initialBlocks, handleUpload: handleUpload || null }}
+    >
       <div className="relative flex flex-col space-y-6">
         <MarkdownerToolbar />
         <MarkdownerBlocks />

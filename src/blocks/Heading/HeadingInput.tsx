@@ -1,14 +1,20 @@
-import { useContext } from 'react'
-import { Heading, Level } from '@/types'
-import { MarkdownerContext, useMarkdowner } from '@/core'
+import { memo } from 'react'
+import { useMarkdowner } from '@/core'
+import { Heading, Level, MarkdownerAction } from '@/types'
 
 type Props = {
   value: Heading
+  dispatch(action: MarkdownerAction): void
 }
 
-export function HeadingInput({ value }: Props) {
-  const { dispatch } = useContext(MarkdownerContext)
-  const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(value)
+export const HeadingInput = memo(function HeadingInput({
+  value,
+  dispatch,
+}: Props) {
+  const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(
+    value,
+    dispatch,
+  )
 
   return (
     <input
@@ -37,4 +43,4 @@ export function HeadingInput({ value }: Props) {
       className="w-full pb-3 bg-transparent font-bold resize-none focus:outline-none"
     />
   )
-}
+})

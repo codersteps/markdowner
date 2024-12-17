@@ -5,31 +5,45 @@ import {
   HeadingInput,
   ParagraphInput,
 } from '@/blocks'
-import { memo } from 'react'
-import { Block } from '@/types'
+import { MarkdownerContext } from '@/core'
+import { useCallback, useContext } from 'react'
+import { Block, MarkdownerAction } from '@/types'
 
-export const MarkdownerBlock = memo(function MarkdownerBlock({
-  block,
-}: {
-  block: Block
-}) {
+export function MarkdownerBlock({ block }: { block: Block }) {
+  const { state, dispatch } = useContext(MarkdownerContext)
+  const onDispatch = useCallback((action: MarkdownerAction) => {
+    dispatch(action)
+  }, [])
+
   switch (block.type) {
     case 'code':
-      return <CodeInput value={block} />
+      return <CodeInput value={block} dispatch={onDispatch} />
 
     case 'heading':
-      return <HeadingInput value={block} />
+      return <HeadingInput value={block} dispatch={onDispatch} />
 
     case 'list':
-      return <ListInput value={block} />
+      return (
+        <ListInput
+          value={block}
+          dispatch={onDispatch}
+          activeBlockId={state.activeBlockId}
+        />
+      )
 
     case 'picture':
-      return <PictureInput value={block} />
+      return (
+        <PictureInput
+          value={block}
+          handleUpload={state.handleUpload}
+          dispatch={onDispatch}
+        />
+      )
 
     case 'paragraph':
-      return <ParagraphInput value={block} />
+      return <ParagraphInput value={block} dispatch={onDispatch} />
 
     default:
       return null
   }
-})
+}

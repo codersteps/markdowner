@@ -1,19 +1,22 @@
 import { cn, langs } from '@/lib'
-import { Code, Lang } from '@/types'
+import { useMarkdowner } from '@/core'
 import { CodeSyntax } from './CodeSyntax'
-import { useContext, useState } from 'react'
 import { AutosizeTextarea } from '@/components'
-import { MarkdownerContext, useMarkdowner } from '@/core'
+import { memo, useCallback, useState } from 'react'
+import { Code, Lang, MarkdownerAction } from '@/types'
 
 type Props = {
   value: Code
+  dispatch(action: MarkdownerAction): void
 }
 
-export function CodeInput({ value }: Props) {
-  const { dispatch } = useContext(MarkdownerContext)
+export const CodeInput = memo(function CodeInput({ value, dispatch }: Props) {
   const [ready, setReady] = useState(false)
   const [height, setHeight] = useState<string>('auto')
-  const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(value)
+  const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(
+    value,
+    dispatch,
+  )
 
   return (
     <>
@@ -74,9 +77,11 @@ export function CodeInput({ value }: Props) {
         <CodeSyntax
           value={value}
           height={height}
-          setReady={() => setReady(true)}
+          setReady={useCallback(() => {
+            setReady(true)
+          }, [])}
         />
       </div>
     </>
   )
-}
+})

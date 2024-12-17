@@ -10,7 +10,7 @@ import { Dispatch, ReactNode, createContext } from 'react'
 
 const initialState: MarkdownerState = {
   blocks: [],
-  onUpload: null,
+  handleUpload: null,
   lastSelection: null,
   activeTooltipBlockId: null,
   activeBlockId: null,
@@ -23,7 +23,7 @@ export const MarkdownerContext = createContext<{
 }>({ state: initialState, dispatch() {} })
 
 type Props = {
-  value: { initialBlocks: Block[]; onUpload: UploadHandler | null }
+  value: { initialBlocks: Block[]; handleUpload: UploadHandler | null }
   children: ReactNode
 }
 
@@ -31,7 +31,7 @@ export function MarkdownerProvider({ value, children }: Props) {
   const [state, dispatch] = useImmerReducer(markdownerReducer, {
     ...initialState,
     blocks: value.initialBlocks,
-    onUpload: value.onUpload,
+    handleUpload: value.handleUpload,
   })
 
   return (

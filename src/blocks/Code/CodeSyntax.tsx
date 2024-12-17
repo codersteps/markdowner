@@ -1,6 +1,6 @@
 import { Lang } from '@/types'
-import { useCallback, useEffect, useRef, useState } from 'react'
 import { cn, CreateShiki, createShiki } from '@/lib'
+import { memo, useCallback, useEffect, useRef, useState } from 'react'
 
 type Props = {
   value: { text: string; lang: Lang }
@@ -8,7 +8,11 @@ type Props = {
   setReady: () => void
 }
 
-export function CodeSyntax({ value, height, setReady }: Props) {
+export const CodeSyntax = memo(function CodeSyntax({
+  value,
+  height,
+  setReady,
+}: Props) {
   const [syntax, setSyntax] = useState('')
   const [preClassName, setPreClassName] = useState('')
   const codeToHtmlRef = useRef<CreateShiki['codeToHtml'] | null>(null)
@@ -45,4 +49,4 @@ export function CodeSyntax({ value, height, setReady }: Props) {
       dangerouslySetInnerHTML={{ __html: syntax }}
     ></pre>
   )
-}
+})

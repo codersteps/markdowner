@@ -1,10 +1,10 @@
 import { cn } from '@/lib'
-import { ReactNode } from 'react'
-import { useList } from './list.hook'
 import { ListContent } from '@/types'
+import { MouseEventHandler, ReactNode } from 'react'
 
 type Props = {
   itemId: string
+  onClick: MouseEventHandler<HTMLButtonElement>
   itemType: ListContent['type']
   children: ReactNode
   className?: string
@@ -12,12 +12,11 @@ type Props = {
 
 export function ListTypeButton({
   itemId,
+  onClick,
   itemType,
   children,
   className,
 }: Props) {
-  const { toggleItemType } = useList()
-
   return (
     <button
       title="Toggle list type"
@@ -25,7 +24,7 @@ export function ListTypeButton({
         'min-w-6 text-base text-center leading-[22px] font-semibold transition-colors duration-300 text-plumbeous hover:text-black hover:shadow bg-white border border-mercury rounded',
         className,
       )}
-      onClick={toggleItemType}
+      onClick={onClick}
       data-item-id={itemId}
       data-item-type={itemType}
     >

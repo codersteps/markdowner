@@ -1,17 +1,14 @@
-import { Picture } from '@/types'
-import { MarkdownerContext } from '@/core'
+import { useCallback, useState } from 'react'
 import { cn, toastr, useCropper } from '@/lib'
-import { useCallback, useContext, useState } from 'react'
+import { MarkdownerAction, Picture, UploadHandler } from '@/types'
 
 type Props = {
   value: Picture
+  dispatch(action: MarkdownerAction): void
+  handleUpload: UploadHandler | null
 }
 
-export function PictureInput({ value }: Props) {
-  const {
-    dispatch,
-    state: { onUpload: onUploadProp },
-  } = useContext(MarkdownerContext)
+export function PictureInput({ value, dispatch, handleUpload }: Props) {
   const {
     getBlob,
     destroyCropper,
@@ -53,8 +50,8 @@ export function PictureInput({ value }: Props) {
       const formData = new FormData()
       formData.append('file', blob)
 
-      const upload = onUploadProp
-        ? await onUploadProp(formData)
+      const upload = handleUpload
+        ? await handleUpload(formData)
         : { error: "the onUpload prop wasn't provided." }
 
       if ('error' in upload) {
@@ -81,7 +78,7 @@ export function PictureInput({ value }: Props) {
         toastr.show('error', err.message)
       }
     }
-  }, [fileType, dispatch, getBlob, value, onUploadProp, destroyCropper])
+  }, [fileType, dispatch, getBlob, value, handleUpload, destroyCropper])
 
   return (
     <div>

@@ -1,12 +1,13 @@
 import { cn } from '@/lib'
-import { Level } from '@/types'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { uniqueId } from '@/core'
+import { AddBlock, Level } from '@/types'
 import { ToolbarButton } from '@/components'
-import { MarkdownerContext, uniqueId } from '@/core'
 
-export function HeadingAction() {
+type Props = { dispatch(action: AddBlock): void }
+
+export function HeadingAction({ dispatch }: Props) {
   const [isOpen, setIsOpen] = useState(false)
-  const { dispatch } = useContext(MarkdownerContext)
 
   return (
     <div className="relative">

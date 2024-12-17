@@ -1,11 +1,13 @@
 import { cn } from '@/lib'
+import { useState } from 'react'
+import { uniqueId } from '@/core'
+import { AddBlock } from '@/types'
 import { ToolbarButton } from '@/components'
-import { useContext, useState } from 'react'
-import { MarkdownerContext, uniqueId } from '@/core'
 
-export default function ListAction() {
+type Props = { dispatch(action: AddBlock): void }
+
+export default function ListAction({ dispatch }: Props) {
   const [isOpen, setIsOpen] = useState(false)
-  const { dispatch } = useContext(MarkdownerContext)
 
   return (
     <div className="relative">
