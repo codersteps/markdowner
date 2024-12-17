@@ -1,4 +1,5 @@
 import { Block } from '@/types'
+import { Dispatch } from 'react'
 
 export type UploadResponse =
   | {
@@ -13,6 +14,7 @@ export type UploadResponse =
 export type UploadHandler = (formData: FormData) => Promise<UploadResponse>
 
 export type MarkdownerProps = {
+  setBlocks: Dispatch<Block[]>
   handleUpload?: UploadHandler | null
   initialBlocks?: Block[]
 }

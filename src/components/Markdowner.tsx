@@ -1,8 +1,10 @@
 import { MarkdownerProps } from '@/types'
+import { MarkdownerState } from './MarkdownerState'
 import { MarkdownerProvider, uniqueId } from '@/core'
 import { MarkdownerToolbar, MarkdownerBlocks } from '@/components'
 
 export function Markdowner({
+  setBlocks,
   handleUpload,
   initialBlocks = [
     {
@@ -19,6 +21,7 @@ export function Markdowner({
       <div className="relative flex flex-col space-y-6">
         <MarkdownerToolbar />
         <MarkdownerBlocks />
+        <MarkdownerState setBlocks={setBlocks} />
       </div>
     </MarkdownerProvider>
   )
