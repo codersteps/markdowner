@@ -1,33 +1,39 @@
 {
-  "name": "@abdessamadely/markdowner",
-  "version": "0.0.5",
+  "name": "@codersteps/markdowner",
+  "version": "1.0.0",
   "description": "A block based richtext editor for developers",
-  "type": "module",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.js",
   "files": [
-    "/dist"
+    "./dist"
   ],
   "scripts": {
-    "dev": "vite build --watch",
-    "build": "vite build",
-    "test": "vitest",
+    "build": "tsup",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "format": "prettier --write --parser typescript 'src/**/*.{ts,tsx}'"
   },
   "author": "Abdessamad El Hamdany",
   "license": "MIT",
+  "keywords": [
+    "block-based",
+    "block-editor",
+    "rich-text-editor",
+    "developer-blogging"
+  ],
   "devDependencies": {
+    "@swc/core": "^1.10.1",
     "@types/autosize": "^4.0.3",
+    "@types/cheerio": "^0.22.35",
     "@types/node": "22.10.2",
-    "@types/react": "^19.0.1",
+    "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
     "@typescript-eslint/parser": "^8.18.0",
     "autoprefixer": "^10.4.20",
     "clsx": "^2.1.1",
     "concurrently": "^9.1.0",
+    "esbuild-sass-plugin": "^3.3.1",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -36,25 +42,28 @@
     "eslint-plugin-storybook": "^0.11.1",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "sass": "^1.83.0",
     "shiki": "^1.24.2",
     "tailwind-merge": "^2.5.5",
     "tailwindcss": "^3.4.16",
+    "tsup": "^8.3.5",
     "typescript": "^5.7.2",
-    "vite": "^6.0.3",
-    "vite-plugin-dts": "^4.3.0",
     "vitest": "^2.1.8"
   },
   "peerDependencies": {
-    "immer": "^10.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "autosize": "^6.0.1",
+    "cheerio": "^1.0.0",
     "cropperjs": "^1.6.2",
+    "marked": "^15.0.4",
     "noty": "3.2.0-beta-deprecated",
+    "immer": "^10.1.1",
     "use-immer": "^0.11.0"
   }
 }

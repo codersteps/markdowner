@@ -8,8 +8,6 @@ export function useCropper(options: Cropper.Options = {}) {
   const [cropperImageSrc, setCropperImageSrc] = useState<string | null>(null)
 
   useEffect(() => {
-    console.log('use effect')
-
     if (!cropperImageSrc) {
       return () => {}
     }

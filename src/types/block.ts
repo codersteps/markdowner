@@ -17,7 +17,7 @@ export type Paragraph = {
   id: string
   type: 'paragraph'
   text: string
-  html?: string
+  html: string
 }
 
 export type Lang =
