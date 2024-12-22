@@ -9,7 +9,8 @@
     "./dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "dev": "NODE_ENV=development tsup",
+    "build": "NODE_ENV=production tsup",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "format": "prettier --write --parser typescript 'src/**/*.{ts,tsx}'"
   },

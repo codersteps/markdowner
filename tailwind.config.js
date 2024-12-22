@@ -4,5 +4,9 @@ export default {
   theme: {
     extend: {},
   },
+  prefix: 'mdr-',
   plugins: [],
+  corePlugins: {
+    preflight: false,
+  },
 }

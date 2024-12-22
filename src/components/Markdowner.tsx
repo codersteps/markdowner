@@ -19,7 +19,7 @@ export function Markdowner({
     <MarkdownerProvider
       value={{ initialBlocks, handleUpload: handleUpload || null }}
     >
-      <div className="relative flex flex-col space-y-6">
+      <div className="mdr-relative mdr-flex mdr-flex-col mdr-space-y-6">
         <MarkdownerToolbar />
         <MarkdownerBlocks />
         <MarkdownerState setBlocks={setBlocks} />

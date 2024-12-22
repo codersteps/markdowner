@@ -37,22 +37,22 @@ export const OrderedListItem = memo(function OrderedListItem({
   })
 
   return (
-    <ul className={cn('space-y-1', isChild ? 'ps-5' : '')}>
+    <ul className={cn('mdr-space-y-1', isChild ? 'mdr-ps-5' : '')}>
       {items.map((item, idx) => {
-        let className = 'text-xs leading-[22px]'
+        let className = 'mdr-text-xs mdr-leading-[22px]'
         const listNumber = idx + 1
 
         if (listNumber > 9 && listNumber < 100) {
-          className += ' min-w-8'
+          className += ' mdr-min-w-8'
         }
 
         if (listNumber > 99 && listNumber < 1000) {
-          className += ' min-w-9'
+          className += ' mdr-min-w-9'
         }
 
         return (
-          <li className="space-y-1.5" key={idx}>
-            <div className="flex items-start space-x-1.5">
+          <li className="mdr-space-y-1.5" key={idx}>
+            <div className="mdr-flex mdr-items-start mdr-space-x-1.5">
               <ListTypeButton
                 itemId={item.id}
                 onClick={toggleItemType}

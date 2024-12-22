@@ -21,7 +21,7 @@ export function ParagraphAction({ dispatch }: Props) {
           },
         })
       }}
-      className="text-sm font-bold"
+      className="mdr-text-sm mdr-font-bold"
     >
       P
     </ToolbarButton>

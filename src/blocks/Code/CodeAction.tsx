@@ -22,7 +22,7 @@ export function CodeAction({ dispatch }: Props) {
           },
         })
       }}
-      className="text-sm font-bold"
+      className="mdr-text-sm mdr-font-bold"
     >
       {'</>'}
     </ToolbarButton>

@@ -16,8 +16,8 @@ export function MarkdownerToolbar() {
   }, [])
 
   return (
-    <div className="sticky top-3 flex justify-end z-50">
-      <div className="flex space-x-1.5 bg-white rounded">
+    <div className="mdr-sticky mdr-top-3 mdr-flex mdr-justify-end mdr-z-50">
+      <div className="mdr-flex mdr-space-x-1.5 mdr-bg-white mdr-rounded">
         <ParagraphAction dispatch={onDispatch} />
         <HeadingAction dispatch={onDispatch} />
         <CodeAction dispatch={onDispatch} />

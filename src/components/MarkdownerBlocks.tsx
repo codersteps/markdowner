@@ -15,20 +15,20 @@ export function MarkdownerBlocks() {
   const { state, dispatch } = useContext(MarkdownerContext)
 
   return (
-    <div className="bg-white pb-32 space-y-3 rounded-md">
+    <div className="mdr-bg-white mdr-pb-32 mdr-space-y-3 mdr-rounded-md">
       {state.blocks.map((block, idx) => (
         <div key={block.id}>
-          <div className="flex items-stretch space-x-4">
+          <div className="mdr-flex mdr-items-stretch mdr-space-x-4">
             <div
               className={cn(
-                'relative w-10',
-                state.activeTooltipBlockId === block.id ? 'h-10' : '',
+                'mdr-relative mdr-w-10',
+                state.activeTooltipBlockId === block.id ? 'mdr-h-10' : '',
               )}
             >
               <div
                 className={cn(
                   state.activeTooltipBlockId === block.id
-                    ? 'absolute top-0 z-10 bg-white rounded'
+                    ? 'mdr-absolute mdr-top-0 mdr-z-10 mdr-bg-white mdr-rounded'
                     : '',
                 )}
               >
@@ -38,19 +38,21 @@ export function MarkdownerBlocks() {
                   }}
                 >
                   {state.activeTooltipBlockId === block.id ? (
-                    <XMarkIcon className="h-4" />
+                    <XMarkIcon className="mdr-h-4" />
                   ) : block.type === 'heading' ? (
-                    <span className="font-medium text-xs">H{block.level}</span>
+                    <span className="mdr-font-medium mdr-text-xs">
+                      H{block.level}
+                    </span>
                   ) : (
-                    <EllipsisVerticalIcon className="h-4" />
+                    <EllipsisVerticalIcon className="mdr-h-4" />
                   )}
                 </ToolbarButton>
 
                 <div
                   className={cn(
                     state.activeTooltipBlockId === block.id
-                      ? 'flex flex-col items-center space-y-1 mt-1'
-                      : 'hidden',
+                      ? 'mdr-flex mdr-flex-col mdr-items-center mdr-space-y-1 mdr-mt-1'
+                      : 'mdr-hidden',
                   )}
                 >
                   {idx > 0 && (
@@ -62,7 +64,7 @@ export function MarkdownerBlocks() {
                         })
                       }}
                     >
-                      <ArrowUpIcon className="h-4" />
+                      <ArrowUpIcon className="mdr-h-4" />
                     </ToolbarButton>
                   )}
                   {idx < state.blocks.length - 1 && (
@@ -74,7 +76,7 @@ export function MarkdownerBlocks() {
                         })
                       }}
                     >
-                      <ArrowDownIcon className="h-4" />
+                      <ArrowDownIcon className="mdr-h-4" />
                     </ToolbarButton>
                   )}
                   <ToolbarButton
@@ -85,13 +87,13 @@ export function MarkdownerBlocks() {
                       })
                     }}
                   >
-                    <TrashIcon className="h-4" />
+                    <TrashIcon className="mdr-h-4" />
                   </ToolbarButton>
                 </div>
               </div>
             </div>
 
-            <div className={cn('flex-grow', `mdr-${block.type}`)}>
+            <div className={cn('mdr-flex-grow', `mdr-${block.type}`)}>
               <MarkdownerBlock block={block} />
             </div>
           </div>

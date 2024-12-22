@@ -46,7 +46,7 @@ export const AutosizeTextarea = forwardRef<HTMLTextAreaElement, Props>(
       <textarea
         ref={textareaRef}
         className={cn(
-          'block w-full placeholder:text-plumbeous resize-none focus:outline-none',
+          'mdr-block mdr-w-full mdr-placeholder:text-plumbeous mdr-resize-none mdr-focus:outline-none',
           className,
         )}
         {...props}

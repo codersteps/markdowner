@@ -10,19 +10,22 @@ export function HeadingAction({ dispatch }: Props) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="relative">
+    <div className="mdr-relative">
       <ToolbarButton
         title="Insert New Heading"
         onClick={() => {
           setIsOpen((prev) => !prev)
         }}
-        className={cn('text-sm font-bold', isOpen ? 'text-black' : '')}
+        className={cn(
+          'mdr-text-sm mdr-font-bold',
+          isOpen ? 'mdr-text-black' : '',
+        )}
       >
         H
       </ToolbarButton>
 
       <div
-        className="absolute left-0 right-0 top-full space-y-1 mt-1 z-50 bg-white rounded"
+        className="mdr-absolute mdr-left-0 mdr-right-0 mdr-top-full mdr-space-y-1 mdr-mt-1 mdr-z-50 mdr-bg-white mdr-rounded"
         style={{
           display: isOpen ? '' : 'none',
         }}
@@ -43,7 +46,7 @@ export function HeadingAction({ dispatch }: Props) {
               },
             })
           }}
-          className="text-sm font-bold"
+          className="mdr-text-sm mdr-font-bold"
         >
           H2
         </ToolbarButton>
@@ -63,7 +66,7 @@ export function HeadingAction({ dispatch }: Props) {
               },
             })
           }}
-          className="text-sm font-bold"
+          className="mdr-text-sm mdr-font-bold"
         >
           H3
         </ToolbarButton>
@@ -83,7 +86,7 @@ export function HeadingAction({ dispatch }: Props) {
               },
             })
           }}
-          className="text-sm font-bold"
+          className="mdr-text-sm mdr-font-bold"
         >
           H4
         </ToolbarButton>

@@ -82,7 +82,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
 
   return (
     <div>
-      <div className="space-y-1.5">
+      <div className="mdr-space-y-1.5">
         {value.src && !cropperImageSrc && (
           <div onClick={onChoose}>
             <img
@@ -90,12 +90,17 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
               alt={value.alt}
               width={480}
               height={240}
-              className="w-full h-auto"
+              className="mdr-w-full mdr-h-auto"
             />
           </div>
         )}
 
-        <div className={cn(cropperImageSrc ? 'block' : 'hidden', 'max-w-full')}>
+        <div
+          className={cn(
+            cropperImageSrc ? 'mdr-block' : 'mdr-hidden',
+            'mdr-max-w-full',
+          )}
+        >
           <img
             ref={cropperImageRef}
             src={
@@ -104,20 +109,20 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
             }
             width={480}
             height={240}
-            className="block w-full max-w-full h-auto"
+            className="mdr-block mdr-w-full mdr-max-w-full mdr-h-auto"
             alt="Image to use with cropperjs."
           />
         </div>
 
         {!cropperImageSrc && !value.src && (
           <div
-            className="relative"
+            className="mdr-relative"
             style={{ paddingTop: `${(486 / 960) * 100}%` }}
           >
             <button
               type="button"
               onClick={onChoose}
-              className="absolute inset-0 h-full w-full flex items-center justify-center text-plumbeous hover:text-black border border-mercury hover:border-plumbeous rounded"
+              className="mdr-absolute mdr-inset-0 mdr-h-full mdr-w-full mdr-flex mdr-items-center mdr-justify-center mdr-text-plumbeous mdr-hover:text-black mdr-border mdr-border-mercury mdr-hover:border-plumbeous mdr-rounded"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -125,7 +130,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-8"
+                className="mdr-size-8"
               >
                 <path
                   strokeLinecap="round"
@@ -137,7 +142,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
           </div>
         )}
 
-        <div className="space-y-1.5 text-xs">
+        <div className="mdr-space-y-1.5 mdr-text-xs">
           <input
             id={`alt-${value.id}`}
             type="text"
@@ -149,7 +154,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
                 payload: { block: { ...value, alt } },
               })
             }
-            className="block w-full transition-colors duration-300 py-1 px-1.5 bg-white border border-mercury placeholder:text-plumbeous focus:outline-none focus:border-plumbeous"
+            className="mdr-block mdr-w-full mdr-transition-colors mdr-duration-300 mdr-py-1 mdr-px-1.5 mdr-bg-white mdr-border mdr-border-mercury mdr-placeholder:text-plumbeous mdr-focus:outline-none mdr-focus:border-plumbeous"
           />
           <input
             id={`caption-${value.id}`}
@@ -162,15 +167,15 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
                 payload: { block: { ...value, caption } },
               })
             }
-            className="block w-full transition-colors duration-300 py-1 px-1.5 bg-white border border-mercury placeholder:text-plumbeous focus:outline-none focus:border-plumbeous"
+            className="mdr-block mdr-w-full mdr-transition-colors mdr-duration-300 mdr-py-1 mdr-px-1.5 mdr-bg-white mdr-border mdr-border-mercury mdr-placeholder:text-plumbeous mdr-focus:outline-none mdr-focus:border-plumbeous"
           />
         </div>
 
-        <div className="flex items-center justify-end gap-3">
+        <div className="mdr-flex mdr-items-center mdr-justify-end mdr-gap-3">
           {cropperImageSrc && !uploaded && (
             <button
               type="button"
-              className="bg-white w-20 h-10 transition-colors duration-300 border border-mercury text-plumbeous hover:border-plumbeous hover:text-black rounded text-sm font-medium"
+              className="mdr-bg-white mdr-w-20 mdr-h-10 mdr-transition-colors mdr-duration-300 mdr-border mdr-border-mercury mdr-text-plumbeous mdr-hover:border-plumbeous mdr-hover:text-black mdr-rounded mdr-text-sm mdr-font-medium"
               onClick={onUpload}
             >
               Upload
@@ -179,7 +184,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
           {cropperImageSrc && (
             <button
               type="button"
-              className="bg-white h-10 transition-colors duration-300 border border-mercury text-plumbeous hover:border-plumbeous hover:text-black rounded text-sm font-medium px-3"
+              className="mdr-bg-white mdr-h-10 mdr-transition-colors mdr-duration-300 mdr-border mdr-border-mercury mdr-text-plumbeous mdr-hover:border-plumbeous mdr-hover:text-black mdr-rounded mdr-text-sm mdr-font-medium mdr-px-3"
               onClick={onChoose}
             >
               Replace
