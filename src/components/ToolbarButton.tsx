@@ -14,7 +14,7 @@ export function ToolbarButton({ title, className, children, onClick }: Props) {
       type="button"
       title={title}
       className={cn(
-        'mdr-flex mdr-items-center mdr-justify-center mdr-w-10 mdr-h-10 mdr-transition-colors mdr-duration-300 mdr-text-plumbeous mdr-hover:text-black mdr-bg-white mdr-border mdr-border-mercury mdr-rounded',
+        'mdr-flex mdr-items-center mdr-justify-center mdr-w-10 mdr-h-10 mdr-transition-colors mdr-duration-300 mdr-text-plumbeous hover:mdr-text-black mdr-bg-white mdr-border mdr-border-mercury mdr-rounded',
         className,
       )}
       onClick={onClick}

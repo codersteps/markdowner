@@ -40,7 +40,7 @@ export const HeadingInput = memo(function HeadingInput({
         }[value.level]
       }
       autoComplete="off"
-      className="mdr-w-full mdr-pb-3 mdr-bg-transparent mdr-font-bold mdr-resize-none mdr-focus:outline-none"
+      className="mdr-w-full mdr-pb-3 mdr-bg-transparent mdr-font-bold mdr-resize-none focus:mdr-outline-none"
     />
   )
 })

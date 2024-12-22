@@ -36,7 +36,7 @@ export const ParagraphInput = memo(function ParagraphInput({
       onFocus={handleFocus}
       placeholder="Paragraph"
       autoComplete="off"
-      className="mdr-block mdr-w-full mdr-pb-3 mdr-bg-transparent mdr-placeholder:text-plumbeous mdr-resize-none mdr-focus:outline-none"
+      className="mdr-block mdr-w-full mdr-pb-3 mdr-bg-transparent placeholder:mdr-text-plumbeous mdr-resize-none focus:mdr-outline-none"
     />
   )
 })

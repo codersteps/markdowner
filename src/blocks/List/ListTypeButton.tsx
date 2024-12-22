@@ -21,7 +21,7 @@ export function ListTypeButton({
     <button
       title="Toggle list type"
       className={cn(
-        'mdr-min-w-6 mdr-text-base mdr-text-center mdr-leading-[22px] mdr-font-semibold mdr-transition-colors mdr-duration-300 mdr-text-plumbeous mdr-hover:text-black mdr-hover:shadow mdr-bg-white mdr-border mdr-border-mercury mdr-rounded',
+        'mdr-min-w-6 mdr-text-base mdr-text-center mdr-leading-[22px] mdr-font-semibold mdr-transition-colors mdr-duration-300 mdr-text-plumbeous hover:mdr-text-black hover:mdr-shadow mdr-bg-white mdr-border mdr-border-mercury mdr-rounded',
         className,
       )}
       onClick={onClick}

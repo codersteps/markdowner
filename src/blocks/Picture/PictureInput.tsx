@@ -122,7 +122,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
             <button
               type="button"
               onClick={onChoose}
-              className="mdr-absolute mdr-inset-0 mdr-h-full mdr-w-full mdr-flex mdr-items-center mdr-justify-center mdr-text-plumbeous mdr-hover:text-black mdr-border mdr-border-mercury mdr-hover:border-plumbeous mdr-rounded"
+              className="mdr-absolute mdr-inset-0 mdr-h-full mdr-w-full mdr-flex mdr-items-center mdr-justify-center mdr-text-plumbeous hover:mdr-text-black mdr-border mdr-border-mercury hover:mdr-border-plumbeous mdr-rounded"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
                 payload: { block: { ...value, alt } },
               })
             }
-            className="mdr-block mdr-w-full mdr-transition-colors mdr-duration-300 mdr-py-1 mdr-px-1.5 mdr-bg-white mdr-border mdr-border-mercury mdr-placeholder:text-plumbeous mdr-focus:outline-none mdr-focus:border-plumbeous"
+            className="mdr-block mdr-w-full mdr-transition-colors mdr-duration-300 mdr-py-1 mdr-px-1.5 mdr-bg-white mdr-border mdr-border-mercury placeholder:mdr-text-plumbeous focus:mdr-outline-none focus:mdr-border-plumbeous"
           />
           <input
             id={`caption-${value.id}`}
@@ -167,7 +167,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
                 payload: { block: { ...value, caption } },
               })
             }
-            className="mdr-block mdr-w-full mdr-transition-colors mdr-duration-300 mdr-py-1 mdr-px-1.5 mdr-bg-white mdr-border mdr-border-mercury mdr-placeholder:text-plumbeous mdr-focus:outline-none mdr-focus:border-plumbeous"
+            className="mdr-block mdr-w-full mdr-transition-colors mdr-duration-300 mdr-py-1 mdr-px-1.5 mdr-bg-white mdr-border mdr-border-mercury placeholder:mdr-text-plumbeous focus:mdr-outline-none focus:mdr-border-plumbeous"
           />
         </div>
 
@@ -175,7 +175,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
           {cropperImageSrc && !uploaded && (
             <button
               type="button"
-              className="mdr-bg-white mdr-w-20 mdr-h-10 mdr-transition-colors mdr-duration-300 mdr-border mdr-border-mercury mdr-text-plumbeous mdr-hover:border-plumbeous mdr-hover:text-black mdr-rounded mdr-text-sm mdr-font-medium"
+              className="mdr-bg-white mdr-w-20 mdr-h-10 mdr-transition-colors mdr-duration-300 mdr-border mdr-border-mercury mdr-text-plumbeous hover:mdr-border-plumbeous hover:mdr-text-black mdr-rounded mdr-text-sm mdr-font-medium"
               onClick={onUpload}
             >
               Upload
@@ -184,7 +184,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
           {cropperImageSrc && (
             <button
               type="button"
-              className="mdr-bg-white mdr-h-10 mdr-transition-colors mdr-duration-300 mdr-border mdr-border-mercury mdr-text-plumbeous mdr-hover:border-plumbeous mdr-hover:text-black mdr-rounded mdr-text-sm mdr-font-medium mdr-px-3"
+              className="mdr-bg-white mdr-h-10 mdr-transition-colors mdr-duration-300 mdr-border mdr-border-mercury mdr-text-plumbeous hover:mdr-border-plumbeous hover:mdr-text-black mdr-rounded mdr-text-sm mdr-font-medium mdr-px-3"
               onClick={onChoose}
             >
               Replace
