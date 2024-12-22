@@ -1,5 +1,5 @@
+import { cn, useCropper } from '@/lib'
 import { useCallback, useState } from 'react'
-import { cn, toastr, useCropper } from '@/lib'
 import { MarkdownerAction, Picture, UploadHandler } from '@/types'
 
 type Props = {
@@ -27,12 +27,12 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
 
     fileInput.onchange = async () => {
       if (!fileInput.files || fileInput.files.length === 0) {
-        toastr.show('error', 'no file was chosen')
+        console.error('no file was chosen')
         return
       }
 
       if (!fileInput.files[0].type.startsWith('image/')) {
-        toastr.show('error', 'please choose a valid image file')
+        console.error('please choose a valid image file')
         return
       }
 
@@ -55,7 +55,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
         : { error: "the onUpload prop wasn't provided." }
 
       if ('error' in upload) {
-        toastr.show('error', upload.error)
+        console.error(upload.error)
         return
       }
 
@@ -75,7 +75,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
       })
     } catch (err) {
       if (err instanceof Error) {
-        toastr.show('error', err.message)
+        console.error(err.message)
       }
     }
   }, [fileType, dispatch, getBlob, value, handleUpload, destroyCropper])

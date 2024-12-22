@@ -1,4 +1,3 @@
-import { toastr } from '@/lib'
 import Cropper from 'cropperjs'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
@@ -13,7 +12,7 @@ export function useCropper(options: Cropper.Options = {}) {
     }
 
     if (!cropperImageRef.current) {
-      toastr.show('error', 'cropper no image element found')
+      console.error('cropper no image element found')
       return () => {}
     }
 

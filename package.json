@@ -9,7 +9,7 @@
     "./dist"
   ],
   "scripts": {
-    "dev": "NODE_ENV=development tsup",
+    "dev": "NODE_ENV=development tsup --watch",
     "build": "NODE_ENV=production tsup",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "format": "prettier --write --parser typescript 'src/**/*.{ts,tsx}'"
@@ -62,9 +62,8 @@
     "autosize": "^6.0.1",
     "cheerio": "^1.0.0",
     "cropperjs": "^1.6.2",
-    "marked": "^15.0.4",
-    "noty": "3.2.0-beta-deprecated",
     "immer": "^10.1.1",
+    "marked": "^15.0.4",
     "use-immer": "^0.11.0"
   }
 }
