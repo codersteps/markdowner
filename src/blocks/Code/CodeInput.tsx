@@ -1,8 +1,7 @@
-import { cn, langs } from '@/lib'
+import { memo, useState } from 'react'
 import { useMarkdowner } from '@/core'
-import { CodeSyntax } from './CodeSyntax'
+import { codeToHtml, langs } from '@/lib'
 import { AutosizeTextarea } from '@/components'
-import { memo, useCallback, useState } from 'react'
 import { Code, Lang, MarkdownerAction } from '@/types'
 
 type Props = {
@@ -11,8 +10,8 @@ type Props = {
 }
 
 export const CodeInput = memo(function CodeInput({ value, dispatch }: Props) {
-  const [ready, setReady] = useState(false)
   const [height, setHeight] = useState<string>('auto')
+  const [syntax, setSyntax] = useState(value.html || codeToHtml(value))
   const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(
     value,
     dispatch,
@@ -52,10 +51,7 @@ export const CodeInput = memo(function CodeInput({ value, dispatch }: Props) {
           </select>
         </div>
       </div>
-      <div
-        className={cn('code-input', ready ? '--initialized' : '')}
-        style={{ height }}
-      >
+      <div className="code-input" style={{ height }}>
         <AutosizeTextarea
           id={`code-${value.id}`}
           ref={ref}
@@ -63,6 +59,7 @@ export const CodeInput = memo(function CodeInput({ value, dispatch }: Props) {
           spellCheck="false"
           onChange={(e) => {
             const block = { ...value, text: e.currentTarget.value }
+            setSyntax(codeToHtml(block))
             dispatch({
               type: 'UPDATE_BLOCK',
               payload: { block },
@@ -74,12 +71,10 @@ export const CodeInput = memo(function CodeInput({ value, dispatch }: Props) {
           onKeyDown={handleKeyDown}
           placeholder="Code"
         />
-        <CodeSyntax
-          value={value}
-          height={height}
-          setReady={useCallback(() => {
-            setReady(true)
-          }, [])}
+        <div
+          style={{ height }}
+          className="code-syntax"
+          dangerouslySetInnerHTML={{ __html: syntax }}
         />
       </div>
     </>

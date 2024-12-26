@@ -45,7 +45,7 @@
 
       select {
         padding-right: 0;
-        text-transform: capitalize;
+        text-transform: lowercase;
       }
     }
   }
@@ -53,7 +53,7 @@
   .code-input {
     position: relative;
 
-    & > pre,
+    & > .code-syntax > pre,
     & > textarea {
       top: 0;
       left: 0;
@@ -63,7 +63,7 @@
     }
 
     & > textarea,
-    & > pre > code {
+    & > .code-syntax > pre > code {
       padding: 12px;
       font-size: 14px;
       text-wrap: wrap;
@@ -74,11 +74,11 @@
       font-family: var(--font-mono);
     }
 
-    & > pre {
+    & > .code-syntax > pre {
       z-index: 10;
     }
 
-    & > pre > code {
+    & > .code-syntax > pre > code {
       width: 100%;
       height: 100%;
       display: block;
@@ -90,16 +90,11 @@
       color: transparent;
       background: transparent;
       caret-color: var(--main-text-color);
+      border: 1px solid var(--main-border-color);
 
       &:focus {
         outline: none;
         border-color: var(--focus-border-color);
-      }
-    }
-
-    &.--initialized {
-      & > textarea {
-        border: 1px solid var(--main-border-color);
       }
     }
   }

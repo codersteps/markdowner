@@ -1,6 +1,6 @@
 import {
-  ListInput,
   CodeInput,
+  ListInput,
   PictureInput,
   HeadingInput,
   ParagraphInput,
