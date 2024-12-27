@@ -17,7 +17,6 @@ export type Paragraph = {
   id: string
   type: 'paragraph'
   text: string
-  html: string
 }
 
 export type Lang =
@@ -46,7 +45,6 @@ export interface Code {
   lang: Lang
   type: 'code'
   text: string
-  html?: string
   filename: string
 }
 
@@ -64,7 +62,6 @@ export type ListContent = {
 export type List = {
   id: string
   type: 'list'
-  html?: string
   content: ListContent
 }
 

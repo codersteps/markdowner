@@ -71,7 +71,6 @@ export function buildBlocksManager(elements: MarkdownerElements) {
               id: uniqueId(),
               text: '',
               type: 'paragraph',
-              html: '',
             })
           }
           break
@@ -298,7 +297,6 @@ export function buildBlocksManager(elements: MarkdownerElements) {
               id: uniqueId(),
               text: '',
               type: 'paragraph',
-              html: '',
             })
           }
           break

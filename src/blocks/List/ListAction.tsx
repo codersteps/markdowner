@@ -40,7 +40,6 @@ export default function ListAction({ dispatch }: Props) {
                 block: {
                   id: uniqueId(),
                   type: 'list',
-                  html: '',
                   content: {
                     type: 'unordered',
                     items: [{ id: uniqueId(), text: '' }],
@@ -63,7 +62,6 @@ export default function ListAction({ dispatch }: Props) {
                 block: {
                   id: uniqueId(),
                   type: 'list',
-                  html: '',
                   content: {
                     type: 'ordered',
                     items: [{ id: uniqueId(), text: '' }],

@@ -16,7 +16,6 @@ export function ParagraphAction({ dispatch }: Props) {
               id: uniqueId(),
               text: '',
               type: 'paragraph',
-              html: '',
             },
           },
         })

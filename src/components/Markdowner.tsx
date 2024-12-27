@@ -11,7 +11,6 @@ export function Markdowner({
       id: uniqueId(),
       text: '',
       type: 'paragraph',
-      html: '',
     },
   ],
 }: MarkdownerProps) {
