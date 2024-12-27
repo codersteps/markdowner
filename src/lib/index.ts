@@ -5,5 +5,5 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export * from './shiki'
+export * from './hljs'
 export * from './cropper'

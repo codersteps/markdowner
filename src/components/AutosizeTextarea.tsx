@@ -9,7 +9,7 @@ import { cn } from '@/lib'
 import autosize from 'autosize'
 
 type Props = TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  setHeight?: (height: string) => void
+  setHeight?: (height: string | number) => void
 }
 
 export const AutosizeTextarea = forwardRef<HTMLTextAreaElement, Props>(

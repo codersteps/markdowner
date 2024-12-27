@@ -19,7 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "declaration": true,
     "declarationDir": "dist",
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "dist",
     "noEmit": true,
     "paths": {

@@ -1,7 +1,7 @@
-import { memo, useState } from 'react'
 import { useMarkdowner } from '@/core'
-import { codeToHtml, langs } from '@/lib'
+import { highlighter, langs } from '@/lib'
 import { AutosizeTextarea } from '@/components'
+import { memo, useEffect, useState } from 'react'
 import { Code, Lang, MarkdownerAction } from '@/types'
 
 type Props = {
@@ -10,12 +10,21 @@ type Props = {
 }
 
 export const CodeInput = memo(function CodeInput({ value, dispatch }: Props) {
-  const [height, setHeight] = useState<string>('auto')
-  const [syntax, setSyntax] = useState(value.html || codeToHtml(value))
+  const [syntax, setSyntax] = useState('')
+  const [height, setHeight] = useState<string | number>('auto')
   const { ref, handleBlur, handleFocus, handleKeyDown } = useMarkdowner(
     value,
     dispatch,
   )
+
+  useEffect(() => {
+    setSyntax(
+      highlighter({
+        text: value.text,
+        lang: value.lang,
+      }),
+    )
+  }, [value.text, value.lang])
 
   return (
     <>
@@ -59,7 +68,6 @@ export const CodeInput = memo(function CodeInput({ value, dispatch }: Props) {
           spellCheck="false"
           onChange={(e) => {
             const block = { ...value, text: e.currentTarget.value }
-            setSyntax(codeToHtml(block))
             dispatch({
               type: 'UPDATE_BLOCK',
               payload: { block },
@@ -71,11 +79,9 @@ export const CodeInput = memo(function CodeInput({ value, dispatch }: Props) {
           onKeyDown={handleKeyDown}
           placeholder="Code"
         />
-        <div
-          style={{ height }}
-          className="code-syntax"
-          dangerouslySetInnerHTML={{ __html: syntax }}
-        />
+        <pre className="hljs">
+          <code dangerouslySetInnerHTML={{ __html: syntax }} />
+        </pre>
       </div>
     </>
   )

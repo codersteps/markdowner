@@ -33,7 +33,6 @@ export type Lang =
   | 'xml'
   | 'yml'
   | 'cpp'
-  | 'csv'
   | 'php'
   | 'html'
   | 'scss'
