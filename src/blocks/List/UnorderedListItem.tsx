@@ -51,6 +51,7 @@ export const UnorderedListItem = memo(function UnorderedListItem({
               onFocus={handleFocus}
               onChange={handleOnItemChange}
               onKeyDown={handleKeyDown}
+              placeholder="List item"
             />
           </div>
 

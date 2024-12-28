@@ -69,6 +69,7 @@ export const OrderedListItem = memo(function OrderedListItem({
                 onFocus={handleFocus}
                 onChange={handleOnItemChange}
                 onKeyDown={handleKeyDown}
+                placeholder="List item"
               />
             </div>
 
