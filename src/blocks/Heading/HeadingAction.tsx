@@ -25,7 +25,7 @@ export function HeadingAction({ dispatch }: Props) {
       </ToolbarButton>
 
       <div
-        className="mdr-absolute mdr-left-0 mdr-right-0 mdr-top-full mdr-space-y-1 mdr-mt-1 mdr-z-50 mdr-bg-white mdr-rounded"
+        className="mdr-absolute mdr-left-0 mdr-right-0 mdr-top-full mdr-space-y-1 mdr-mt-1 mdr-z-20 mdr-bg-white mdr-rounded"
         style={{
           display: isOpen ? '' : 'none',
         }}
