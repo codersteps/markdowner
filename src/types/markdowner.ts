@@ -15,13 +15,15 @@ export type UploadHandler = (formData: FormData) => Promise<UploadResponse>
 
 export type MarkdownerProps = {
   setBlocks: Dispatch<Block[]>
-  handleUpload?: UploadHandler | null
+  handleUpload?: UploadHandler
+  staticAppUrl?: string
   initialBlocks?: Block[]
 }
 
 export type MarkdownerState = {
   blocks: Block[]
-  handleUpload: UploadHandler | null
+  handleUpload?: UploadHandler
+  staticAppUrl?: string
   activeTooltipBlockId: string | null
   activeBlockId: string | null
   lastActiveBlockId: string | null

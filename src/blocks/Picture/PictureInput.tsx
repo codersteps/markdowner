@@ -5,10 +5,16 @@ import { MarkdownerAction, Picture, UploadHandler } from '@/types'
 type Props = {
   value: Picture
   dispatch(action: MarkdownerAction): void
-  handleUpload: UploadHandler | null
+  handleUpload?: UploadHandler
+  staticAppUrl?: string
 }
 
-export function PictureInput({ value, dispatch, handleUpload }: Props) {
+export function PictureInput({
+  value,
+  dispatch,
+  handleUpload,
+  staticAppUrl,
+}: Props) {
   const {
     getBlob,
     destroyCropper,
@@ -52,7 +58,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
 
       const upload = handleUpload
         ? await handleUpload(formData)
-        : { error: "the onUpload prop wasn't provided." }
+        : { error: "the handleUpload prop wasn't provided." }
 
       if ('error' in upload) {
         console.error(upload.error)
@@ -86,7 +92,7 @@ export function PictureInput({ value, dispatch, handleUpload }: Props) {
         {value.src && !cropperImageSrc && (
           <div onClick={onChoose}>
             <img
-              src={value.src}
+              src={`${staticAppUrl || ''}${value.src}`}
               alt={value.alt}
               width={480}
               height={240}

@@ -35,6 +35,7 @@ export function MarkdownerBlock({ block }: { block: Block }) {
       return (
         <PictureInput
           value={block}
+          staticAppUrl={state.staticAppUrl}
           handleUpload={state.handleUpload}
           dispatch={onDispatch}
         />
