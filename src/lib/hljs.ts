@@ -19,7 +19,7 @@ import json from 'highlight.js/lib/languages/json'
 import twig from 'highlight.js/lib/languages/twig'
 import java from 'highlight.js/lib/languages/java'
 
-export const langs = [
+export const langs: Lang[] = [
   'c',
   'md',
   'js',

@@ -33,6 +33,7 @@ export type Lang =
   | 'yml'
   | 'cpp'
   | 'php'
+  | 'bash'
   | 'html'
   | 'scss'
   | 'json'
