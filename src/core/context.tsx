@@ -10,6 +10,7 @@ import { Dispatch, ReactNode, createContext } from 'react'
 
 const initialState: MarkdownerState = {
   blocks: [],
+  initialElements: [],
   handleUpload: undefined,
   staticAppUrl: undefined,
   lastSelection: null,
@@ -36,6 +37,7 @@ export function MarkdownerProvider({ value, children }: Props) {
   const [state, dispatch] = useImmerReducer(markdownerReducer, {
     ...initialState,
     blocks: value.initialBlocks,
+    initialElements: value.initialBlocks.map(({ id }) => id),
     staticAppUrl: value.staticAppUrl,
     handleUpload: value.handleUpload,
   })

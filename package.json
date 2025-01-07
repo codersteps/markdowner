@@ -1,6 +1,6 @@
 {
   "name": "@codersteps/markdowner",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A block based richtext editor for developers",
   "main": "./dist/index.cjs",
   "types": "./dist/index.d.ts",

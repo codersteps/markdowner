@@ -12,11 +12,13 @@ export function markdownerReducer(
 
   switch (type) {
     case 'ADD_ELEMENT':
-      if (payload.element.value.length) {
-        payload.element.selectionEnd = payload.element.value.length
-        payload.element.selectionStart = payload.element.value.length
+      if (!draft.initialElements.includes(payload.id)) {
+        if (payload.element.value.length) {
+          payload.element.selectionEnd = payload.element.value.length
+          payload.element.selectionStart = payload.element.value.length
+        }
+        payload.element.focus()
       }
-      payload.element.focus()
       elements.set(payload.id, payload.element)
       break
     case 'REMOVE_ELEMENT':

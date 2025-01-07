@@ -22,6 +22,7 @@ export type MarkdownerProps = {
 
 export type MarkdownerState = {
   blocks: Block[]
+  initialElements: string[]
   handleUpload?: UploadHandler
   staticAppUrl?: string
   activeTooltipBlockId: string | null
